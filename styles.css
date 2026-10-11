@@ -1,0 +1,236 @@
+/* ============================================================
+   Conqr. — Landing Agencia de Redes Sociales
+   Réplica de estilo (dark / Helvetica Bold / minimal) + SEO
+   ============================================================ */
+
+:root{
+  --bg:#000;
+  --fg:#fff;
+  --muted:rgba(255,255,255,.58);
+  --line:rgba(255,255,255,.14);
+  --red:#d8382f;
+  --blue:#2e6f9e;
+  --cyan:#25c2e0;
+  --maxw:1180px;
+  --gutter:clamp(20px,5vw,80px);
+  --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--font);
+  font-weight:700;
+  line-height:1.35;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+em{font-style:italic;color:var(--cyan)}
+strong{font-weight:700}
+.hl{color:var(--cyan)}
+
+.skip{position:absolute;left:-999px;top:0;background:#fff;color:#000;padding:10px 16px;z-index:200}
+.skip:focus{left:10px;top:10px}
+
+/* ---------- HEADER ---------- */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px var(--gutter);
+  background:linear-gradient(to bottom,rgba(0,0,0,.65),transparent);
+}
+.logo{font-size:28px;letter-spacing:-.02em}
+.logo span{color:var(--red)}
+.nav{display:flex;gap:34px;font-size:14px;letter-spacing:.02em}
+.nav a{opacity:.85;transition:opacity .2s}
+.nav a:hover{opacity:1}
+.nav-cta{border:1px solid var(--fg);padding:8px 18px;border-radius:40px;opacity:1}
+.menu-toggle{display:none;background:none;border:0;cursor:pointer;width:34px;height:24px;position:relative}
+.menu-toggle span{position:absolute;left:0;right:0;height:2px;background:#fff;transition:.3s}
+.menu-toggle span:nth-child(1){top:6px}
+.menu-toggle span:nth-child(2){bottom:6px}
+.menu-toggle[aria-expanded="true"] span:nth-child(1){top:11px;transform:rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span:nth-child(2){bottom:11px;transform:rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:0;z-index:95;background:#000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;
+  font-size:clamp(28px,8vw,52px);
+}
+.mobile-menu a{opacity:.9}
+.mobile-menu[hidden]{display:none}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:140px var(--gutter) 90px;
+  overflow:hidden;
+}
+.hero-inner{position:relative;z-index:2;max-width:980px}
+.eyebrow{
+  font-size:13px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:26px;
+}
+h1{
+  font-size:clamp(46px,9vw,112px);
+  line-height:.98;letter-spacing:-.03em;margin-bottom:28px;
+}
+.lede{
+  font-weight:400;font-family:var(--font);
+  font-size:clamp(16px,2vw,21px);line-height:1.5;
+  color:var(--muted);max-width:640px;margin-bottom:38px;
+}
+.lede strong{color:var(--fg)}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+
+.btn{
+  display:inline-block;font-size:15px;letter-spacing:.01em;
+  padding:16px 30px;border-radius:40px;transition:.25s;cursor:pointer;
+}
+.btn-primary{background:#fff;color:#000}
+.btn-primary:hover{background:var(--cyan);color:#000}
+.btn-ghost{border:1px solid var(--line)}
+.btn-ghost:hover{border-color:#fff}
+
+.scroll-hint{
+  position:absolute;bottom:34px;left:var(--gutter);z-index:2;
+  font-size:11px;letter-spacing:.3em;color:var(--muted);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.9}}
+
+/* Torus / anillo del hero */
+.ring{
+  position:absolute;z-index:1;top:50%;right:-6vw;transform:translateY(-50%);
+  width:min(74vmin,680px);aspect-ratio:1;border-radius:50%;
+  background:conic-gradient(from 210deg,
+     var(--red),#0e1a26 22%,var(--blue) 46%,var(--cyan) 56%,#0e1a26 72%,var(--red));
+  -webkit-mask:radial-gradient(circle at center,transparent 35%,#000 36.5%,#000 63%,transparent 64.5%);
+  mask:radial-gradient(circle at center,transparent 35%,#000 36.5%,#000 63%,transparent 64.5%);
+  filter:blur(1.5px) saturate(1.15) contrast(1.05);
+  animation:spin 34s linear infinite;
+  opacity:.92;
+}
+.ring-glow{
+  position:absolute;inset:-14%;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,56,47,.22),rgba(37,194,224,.14) 55%,transparent 70%);
+  filter:blur(40px);
+}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
+
+/* ---------- STATEMENT ---------- */
+.statement{padding:clamp(80px,14vh,180px) var(--gutter);max-width:1000px;margin:0 auto}
+.statement p{
+  font-size:clamp(24px,4vw,46px);line-height:1.22;letter-spacing:-.02em;
+}
+.statement strong{color:var(--fg)}
+
+/* ---------- SECTION HEAD ---------- */
+.section-head{max-width:var(--maxw);margin:0 auto 60px}
+.section-head h2{font-size:clamp(34px,6vw,70px);line-height:1;letter-spacing:-.03em}
+.section-head p{margin-top:22px;max-width:520px;font-weight:400;color:var(--muted);font-size:clamp(15px,1.6vw,18px);line-height:1.5}
+
+/* ---------- SERVICIOS ---------- */
+.services{padding:clamp(60px,10vh,120px) var(--gutter);border-top:1px solid var(--line)}
+.service-grid{
+  max-width:var(--maxw);margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);
+}
+.service{background:#000;padding:clamp(28px,3vw,44px);min-height:240px;transition:background .3s}
+.service:hover{background:#0a0a0a}
+.service .num{font-size:13px;color:var(--red);letter-spacing:.1em}
+.service h3{font-size:clamp(20px,2.3vw,27px);margin:16px 0 14px;letter-spacing:-.01em}
+.service p{font-weight:400;color:var(--muted);font-size:15px;line-height:1.55}
+
+/* ---------- STATS ---------- */
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+  max-width:var(--maxw);margin:0 auto;padding:clamp(70px,12vh,140px) var(--gutter);
+  text-align:center;
+}
+.stat strong{display:block;font-size:clamp(50px,9vw,104px);line-height:1;letter-spacing:-.04em}
+.stat span{font-weight:400;color:var(--muted);font-size:15px;display:inline-block;margin-top:14px}
+
+/* ---------- PROCESO ---------- */
+.process{padding:clamp(60px,10vh,120px) var(--gutter);border-top:1px solid var(--line)}
+.steps{max-width:var(--maxw);margin:0 auto;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.steps li{background:#000;padding:clamp(26px,2.6vw,38px)}
+.steps span{color:var(--cyan);font-size:14px}
+.steps h3{margin:18px 0 12px;font-size:clamp(19px,2vw,24px)}
+.steps p{font-weight:400;color:var(--muted);font-size:14.5px;line-height:1.55}
+
+/* ---------- PLATAFORMAS ---------- */
+.platforms{padding:clamp(70px,12vh,150px) var(--gutter);text-align:center;border-top:1px solid var(--line)}
+.platforms h2{font-size:clamp(28px,5vw,58px);letter-spacing:-.03em;margin-bottom:46px}
+.platform-list{list-style:none;display:flex;flex-wrap:wrap;gap:clamp(18px,4vw,60px);justify-content:center;font-size:clamp(20px,3vw,38px)}
+.platform-list li{opacity:.35;transition:opacity .25s,color .25s}
+.platform-list li:hover{opacity:1;color:var(--cyan)}
+
+/* ---------- TRABAJO ---------- */
+.work{padding:clamp(60px,10vh,120px) var(--gutter);border-top:1px solid var(--line)}
+.work-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,28px)}
+.tile{display:block}
+.tile-media{aspect-ratio:16/10;border-radius:6px;position:relative;overflow:hidden;filter:grayscale(.3)}
+.tile:hover .tile-media{filter:grayscale(0)}
+.tile-media::after{content:"";position:absolute;inset:0;transition:transform .5s ease;transform:scale(1.02)}
+.tile:hover .tile-media::after{transform:scale(1.08)}
+.m1{background:linear-gradient(135deg,#d8382f,#3a0f0d)}
+.m2{background:linear-gradient(135deg,#25c2e0,#0a2a33)}
+.m3{background:linear-gradient(135deg,#2e6f9e,#0d1b26)}
+.m4{background:linear-gradient(135deg,#8e44ad,#1a0d26)}
+.tile span{display:inline-block;margin-top:14px;font-size:14px;color:var(--muted)}
+.work-note{max-width:var(--maxw);margin:34px auto 0;font-weight:400;font-size:12.5px;color:rgba(255,255,255,.35)}
+
+/* ---------- FAQ ---------- */
+.faq{padding:clamp(60px,10vh,120px) var(--gutter);border-top:1px solid var(--line)}
+.faq-list{max-width:860px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--line);padding:4px 0}
+.faq summary{cursor:pointer;list-style:none;padding:26px 0;font-size:clamp(18px,2.2vw,24px);display:flex;justify-content:space-between;gap:20px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--cyan);transition:transform .3s}
+.faq details[open] summary::after{content:"–"}
+.faq details p{font-weight:400;color:var(--muted);line-height:1.6;padding:0 0 26px;max-width:680px}
+
+/* ---------- CTA ---------- */
+.cta{padding:clamp(90px,16vh,200px) var(--gutter);text-align:center;border-top:1px solid var(--line)}
+.cta h2{font-size:clamp(34px,7vw,88px);line-height:1;letter-spacing:-.03em;margin-bottom:26px}
+.cta p{font-weight:400;color:var(--muted);font-size:clamp(16px,2vw,20px);margin-bottom:40px}
+
+/* ---------- FOOTER ---------- */
+.site-footer{padding:60px var(--gutter);border-top:1px solid var(--line);text-align:center}
+.foot-brand{font-size:30px;margin-bottom:16px}
+.foot-brand span{color:var(--red)}
+.foot-tag{font-weight:400;color:var(--muted);font-size:14px;max-width:560px;margin:0 auto 24px}
+.foot-social{display:flex;gap:26px;justify-content:center;font-size:14px;margin-bottom:28px}
+.foot-social a{opacity:.7;transition:opacity .2s}
+.foot-social a:hover{opacity:1;color:var(--cyan)}
+.foot-copy{font-weight:400;color:rgba(255,255,255,.3);font-size:12.5px}
+
+/* ---------- SCROLL REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in-view{opacity:1;transform:none}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:860px){
+  .nav{display:none}
+  .menu-toggle{display:block}
+  .service-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr;gap:56px}
+  .work-grid{grid-template-columns:1fr}
+  .ring{right:-30vw;opacity:.5}
+}
+@media(max-width:520px){
+  .steps{grid-template-columns:1fr}
+}
+
+/* ---------- ACCESIBILIDAD: menos movimiento ---------- */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+}
