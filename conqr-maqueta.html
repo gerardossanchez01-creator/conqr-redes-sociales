@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Maqueta de contenido del sitio de Conqr: Home, verticales, portafolio y blog.">
+<style>:root{color-scheme:dark;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Maqueta sitio Conqr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,800;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: hero limpio + bloques de servicio a pantalla partida (texto / imagen), el texto pesado hasta el pie */
+:root{
+  --bg:#000000;
+  --panel:#0B0D10;
+  --panel-2:#111418;
+  --line:#1E2228;
+  --fg:#FFFFFF;
+  --fg-soft:#8B939E;
+  --fg-dim:#4A515B;
+  --accent:#29A8E8;
+  --note:#E8D28A;
+  --note-bg:#241F0E;
+  --font:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.03;text-wrap:balance}
+p{margin:0}
+em{font-style:italic;font-weight:400;color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:24px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+/* barra de maqueta */
+.bar{background:var(--panel);border-bottom:1px solid var(--line)}
+.bar-in{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding-block:9px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-soft)}
+.count{font-family:var(--mono);font-size:11px;color:var(--fg-soft);font-variant-numeric:tabular-nums}
+.count b{color:var(--fg);font-weight:500}
+.ctl{font-family:var(--mono);font-size:10.5px;background:none;color:var(--fg-soft);border:1px solid var(--line);border-radius:3px;padding:6px 10px;cursor:pointer}
+.ctl:hover,.ctl[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+
+/* notas */
+.note{display:none}
+body.notes .note{display:block;margin:0 0 26px}
+.note-in{background:var(--note-bg);color:var(--note);border-left:2px solid currentColor;font-family:var(--mono);font-size:11px;line-height:1.7;padding:11px 14px;text-transform:none}
+.note-in b{font-weight:500}
+
+/* ---------- nav ---------- */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:80;background:rgba(0,0,0,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:10px;padding-block:16px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.06em;cursor:pointer}
+.logo i{color:var(--accent);font-style:normal}
+.nav-sp{flex:1}
+.menu{display:flex;align-items:center;gap:2px}
+.mi{position:relative}
+.mi > button{font-family:var(--font);font-size:13px;font-weight:500;color:var(--fg-soft);background:none;border:0;padding:9px 13px;cursor:pointer;border-radius:999px;white-space:nowrap}
+.mi > button:hover,.mi.on > button{color:var(--fg)}
+.mi > button .car{display:inline-block;margin-left:6px;font-size:9px;color:var(--fg-dim);vertical-align:1px}
+.dd{position:absolute;top:100%;left:0;min-width:238px;background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:7px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.18s;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.mi:hover .dd,.mi:focus-within .dd{opacity:1;visibility:visible;transform:translateY(4px)}
+.dd button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);font-family:var(--font);font-size:13.5px;padding:10px 12px;border-radius:4px;cursor:pointer}
+.dd button:hover{background:rgba(41,168,232,.12);color:var(--accent)}
+.dd button span{display:block;font-size:11px;color:var(--fg-dim);margin-top:2px}
+.pill{border:1px solid var(--fg);border-radius:999px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;background:none;color:var(--fg);font-family:var(--font);white-space:nowrap}
+.pill:hover{background:var(--fg);color:#000}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:4px;color:var(--fg);padding:8px 11px;cursor:pointer;font-family:var(--mono);font-size:11px}
+
+/* ---------- hero ---------- */
+.hero{border-bottom:1px solid var(--line)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);gap:48px;align-items:center;padding-block:clamp(64px,9vw,118px)}
+.kicker{color:var(--accent);margin-bottom:28px}
+h1{font-size:clamp(2.6rem,6.6vw,4.9rem)}
+.lede{color:var(--fg-soft);font-size:clamp(1.08rem,1.9vw,1.38rem);line-height:1.45;max-width:40ch;margin:0 0 30px}
+.acts{margin-top:38px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{border-radius:999px;padding:14px 26px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);border:1px solid var(--fg);background:var(--fg);color:#000}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-b{background:transparent;color:var(--fg)}
+.btn-b:hover{background:transparent;border-color:var(--accent);color:var(--accent)}
+
+/* etimologia de marca */
+.etim{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:baseline}
+.etim .w{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800;letter-spacing:-.05em;line-height:1}
+.etim .w i{font-style:normal;color:var(--accent)}
+.etim .ph2{font-family:var(--mono);font-size:12px;color:var(--fg-dim);margin-top:14px;letter-spacing:.04em}
+.etim .def{color:var(--fg-soft);font-size:clamp(1.05rem,2.2vw,1.35rem);line-height:1.4;max-width:34ch}
+.etim .def b{color:var(--fg);font-weight:600}
+
+/* portafolio */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:38px}
+.filters button{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:999px;color:var(--fg-soft);padding:9px 16px;cursor:pointer}
+.filters button:hover{color:var(--fg)}
+.filters button.on{background:var(--fg);color:#000;border-color:var(--fg)}
+.works{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.work{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column;min-width:0}
+.work .ph{border:0;border-radius:0;border-bottom:1px solid var(--line);aspect-ratio:4/3}
+.work .in{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.work .cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.work h3{font-size:1.05rem;font-weight:600;letter-spacing:-.015em}
+.work p{font-size:.88rem;color:var(--fg-soft);line-height:1.5}
+.work .res{margin-top:auto;padding-top:13px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--fg);font-variant-numeric:tabular-nums;line-height:1.6}
+
+/* bloque de imagen marcado */
+.ph{position:relative;border:1px dashed #2C323A;border-radius:4px;background:
+  linear-gradient(135deg,rgba(41,168,232,.08),rgba(255,255,255,.02)),
+  repeating-linear-gradient(135deg,transparent 0 11px,rgba(255,255,255,.03) 11px 12px);
+  display:grid;place-content:center;gap:6px;text-align:center;padding:22px;max-width:100%}
+.ph .t{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.ph .d{font-size:12.5px;color:var(--fg-soft);max-width:34ch;line-height:1.5}
+.ph-hero{aspect-ratio:1/1}
+
+/* ---------- bloque de servicio a pantalla partida ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);align-items:stretch}
+.split .side{padding:clamp(48px,6.5vw,96px) clamp(24px,5vw,84px);display:flex;flex-direction:column;justify-content:center;min-width:0}
+.split .media{min-height:clamp(280px,40vw,580px);border-left:1px solid var(--line)}
+.split .media .ph{height:100%;border:0;border-radius:0}
+.split.rev .side{order:2}
+.split.rev .media{order:1;border-left:0;border-right:1px solid var(--line)}
+.split h2{font-size:clamp(1.9rem,3.6vw,2.9rem)}
+.split .txt{color:var(--fg-soft);margin-top:20px;max-width:44ch;font-size:clamp(.96rem,1.4vw,1.05rem)}
+.split .items{margin:38px 0 0;padding:0 0 0 22px;list-style:none;border-left:1px solid var(--line)}
+.split .items li{color:var(--fg-soft);font-size:14px;font-weight:500;padding:3px 0}
+.split .go{margin-top:34px;align-self:flex-start;background:none;border:0;border-bottom:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:11px;letter-spacing:.09em;padding:0 0 4px;cursor:pointer;text-transform:uppercase}
+.split .go:hover{color:var(--fg);border-color:var(--fg)}
+
+/* ---------- secciones ---------- */
+section{border-bottom:1px solid var(--line)}
+.sec{padding-block:clamp(56px,7vw,92px)}
+.sec-head{max-width:58ch;margin-bottom:44px}
+h2{font-size:clamp(1.9rem,4.1vw,2.9rem)}
+.sub{color:var(--fg-soft);margin-top:16px;max-width:50ch}
+
+/* dato */
+.dato{display:grid;grid-template-columns:auto minmax(0,1fr);gap:34px;align-items:center}
+.dato .big{font-size:clamp(3.4rem,11vw,6.6rem);font-weight:800;letter-spacing:-.06em;line-height:.88;color:var(--accent);font-variant-numeric:tabular-nums}
+.dato .t2{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:500;letter-spacing:-.02em;line-height:1.3;max-width:32ch}
+.dato .src{font-family:var(--mono);font-size:10px;color:var(--fg-dim);margin-top:12px;letter-spacing:.06em}
+
+/* cifras */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:34px;text-align:center}
+.stat b{display:block;font-size:clamp(2.6rem,7vw,4rem);font-weight:800;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-soft);margin-top:14px}
+
+/* plataformas */
+.plats{display:flex;flex-wrap:wrap;gap:12px 34px;justify-content:center}
+.plats span{font-size:clamp(1.05rem,2.6vw,1.6rem);font-weight:600;letter-spacing:-.02em;color:#3A414B}
+.plats span:hover{color:var(--fg)}
+
+/* proceso */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.step{background:var(--panel);padding:28px 24px 30px}
+.step .n{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:14px}
+.step h3{font-size:1.03rem;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
+.step p{font-size:.9rem;color:var(--fg-soft);line-height:1.5}
+
+/* blog */
+.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:24px}
+.post{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column;min-width:0}
+.post .ph{border:0;border-radius:0;border-bottom:1px solid var(--line);aspect-ratio:16/9}
+.post .in{padding:22px}
+.post .kv{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.post h3{font-size:1.04rem;font-weight:600;letter-spacing:-.015em;line-height:1.25}
+.post .mt{font-family:var(--mono);font-size:10px;color:var(--fg-dim);margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+
+/* faq */
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{font-size:clamp(.98rem,2vw,1.12rem);font-weight:600;letter-spacing:-.015em;padding:23px 44px 23px 0;cursor:pointer;list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:6px;top:20px;font-family:var(--mono);font-size:19px;color:var(--accent);font-weight:400}
+details[open] summary::after{content:"\2212"}
+summary:hover{color:var(--accent)}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ans{padding:0 0 25px;color:var(--fg-soft);max-width:66ch}
+
+/* contenido al pie */
+.prose{color:var(--fg-soft);max-width:68ch}
+.prose h3{font-size:1.16rem;font-weight:600;letter-spacing:-.02em;color:var(--fg);margin:30px 0 11px}
+.prose h3:first-child{margin-top:0}
+.prose p+p{margin-top:13px}
+.prose ul{margin:12px 0 0;padding-left:19px}
+.prose li{margin-bottom:7px}
+.prose b{color:var(--fg);font-weight:600}
+.expand{max-height:11.5em;overflow:hidden;position:relative;transition:max-height .5s ease}
+.expand::after{content:"";position:absolute;inset:auto 0 0 0;height:5.5em;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--bg));transition:opacity .3s}
+.expand.open{max-height:230em}
+.expand.open::after{opacity:0}
+.more{margin-top:20px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;background:none;border:1px solid var(--line);border-radius:999px;color:var(--accent);padding:10px 18px;cursor:pointer}
+.more:hover{border-color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.expand{transition:none}}
+
+.rel{display:flex;flex-wrap:wrap;gap:9px}
+.rel button{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;background:var(--panel);border:1px solid var(--line);border-radius:999px;color:var(--fg-soft);padding:10px 16px;cursor:pointer}
+.rel button:hover{color:var(--accent);border-color:var(--accent)}
+
+.cta{text-align:center;padding-block:clamp(70px,10vw,112px)}
+.cta h2{font-size:clamp(2rem,5.6vw,3.6rem);max-width:17ch;margin-inline:auto}
+.cta p{color:var(--fg-soft);margin-top:20px;max-width:44ch;margin-inline:auto}
+.cta .btn{margin-top:34px}
+
+footer{background:var(--panel);border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:32px;padding-block:56px}
+.foot h4{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-soft);margin:0 0 15px;font-weight:500}
+.foot button{display:block;background:none;border:0;padding:4px 0;color:var(--fg);font-size:13px;cursor:pointer;font-family:var(--font);text-align:left}
+.foot button:hover{color:var(--accent)}
+.legal{border-top:1px solid var(--line);padding-block:22px;font-family:var(--mono);font-size:10px;color:var(--fg-dim);letter-spacing:.06em}
+
+/* vista completa / impresion */
+.pagewrap{border-bottom:6px solid var(--accent)}
+.plabel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);padding:26px 24px 0;max-width:1240px;margin:0 auto}
+@media print{
+  html,body{background:#000 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bar,header,footer,.more,.filters,.note{display:none !important}
+  .pagewrap{break-after:page;border-bottom:0}
+  .split,.work,.post,.card,.step,details{break-inside:avoid}
+  .hero-in{padding-block:40px}
+  .sec{padding-block:36px}
+  .expand{max-height:none !important;overflow:visible !important}
+  .expand::after{display:none !important}
+}
+
+@media (max-width:980px){
+  .menu{display:none}
+  .menu.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--panel-2);border-bottom:1px solid var(--line);padding:10px;gap:0}
+  .menu.open .mi > button{width:100%;text-align:left}
+  .menu.open .dd{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;background:none;padding:0 0 8px 12px}
+  .burger{display:block}
+  header{position:relative}
+}
+@media (max-width:780px){
+  .hero-in{grid-template-columns:1fr;gap:34px}
+  .split{grid-template-columns:1fr}
+  .split .media{order:0 !important;border-left:0;border-right:0;border-top:1px solid var(--line);min-height:240px}
+  .split.rev .side{order:0}
+  .dato{grid-template-columns:1fr;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <span class="tag">Conqr · maqueta de sitio · v3</span>
+    <span style="flex:1"></span>
+    <span class="count">Visibles <b id="cv">—</b> · en el HTML <b id="ct">—</b></span>
+    <button class="ctl" id="btn-all">Ver todo / Imprimir</button>
+    <button class="ctl" id="btn-notes" aria-pressed="false">Notas SEO</button>
+  </div>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <span class="logo" data-go="home">conqr<i>.</i></span>
+    <span class="nav-sp"></span>
+    <nav class="menu" id="menu"></nav>
+    <button class="burger" id="burger">Menú</button>
+    <button class="pill" data-go="contacto">Contacto</button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap foot" id="foot"></div>
+  <div class="wrap legal">© 2026 Conqr · Agencia de marketing digital en México · Maqueta de contenido, sin diseño final</div>
+</footer>
+
+<script>
+(function(){
+var P = {};
+
+/* ===================== HOME ===================== */
+P.home = {
+  nav:"Inicio", kicker:"Agencia de marketing digital · México",
+  h1:'Agencia de marketing digital, <em>creativa y BTL.</em>',
+  lede:"Campañas que no solo se ven: se miden, mejoran y evolucionan. Lo digital y lo que pasa en el piso, del mismo equipo.",
+  heroPh:["Animación de marca","Orbe o forma generativa en movimiento sobre negro. La pieza que carga toda la personalidad del sitio."],
+  note:"H1 · keyword objetivo: agencia de marketing digital — 2.400/mes · KD 63. La keyword entra completa y al inicio, pero la frase es la del deck de credenciales, no una inventada. Secundarias en la misma página: agencia creativa (390), agencia de publicidad (2.400), agencia digital (880).",
+  etim:true,
+  blocks:[
+    {t:"Creatividad.", p:"El trabajo creativo detrás de una marca la distingue y habla de su personalidad única, dando al mundo un vistazo a su propósito y ambición.",
+     items:["Conceptos.","Copywriting.","Dirección creativa.","Diseño de campañas.","Guiones de televisión.","Desarrollo de big ideas.","Mastergraphics y key visuals."],
+     img:["Key visual","Mastergraphic de campaña a sangre. La pieza más fuerte del portafolio creativo."], go:null, anchor:"creatividad"},
+    {t:"Social media.", p:"Comprender al consumidor digital es extremadamente importante. Creamos estrategias y contenido impulsado por datos para conectar marcas con consumidores.",
+     items:["Estrategia.","Producción de contenido.","Community management.","Influencer marketing.","UGC.","Dinámicas.","Eventos y crisis."],
+     img:["Contenido en el feed","Collage de piezas sociales en mockup de teléfono."], go:"redes"},
+    {t:"Medios.", p:"Compramos espacios en los medios más relevantes, con tasas preferenciales y entregas aseguradas para un despliegue exitoso de campaña.",
+     items:["Medios digitales.","TVC y radio.","OOH y DOOH.","Editorial.","Programática.","Monitoreo.","Reporting."],
+     img:["Campaña en medios","Pieza en vía pública o captura de la campaña corriendo, con el panel de métricas."], go:"google"},
+    {t:"BTL.", p:"Le damos vida a lo digital. Desde el concepto del evento hasta la ejecución: creamos, operamos y construimos experiencias de marca en eventos icónicos.",
+     items:["Producción.","Event design.","Planning estratégico.","Operación y logística.","Experiential marketing.","Displays y taller creativo.","Aftermovies y contenido."],
+     img:["Experiencia de marca","Foto a sangre de un evento real: montaje, luz y gente."], go:"btl"},
+    {t:"Branding.", p:"Desarrollamos y diseñamos proyectos integrales de identidad, branding y estrategia de marca. Más de 100 proyectos en el último año.",
+     items:["Naming.","Identidad visual.","Empaque.","Editorial.","Estrategia de marca.","Aplicaciones de marca.","Materiales digitales e impresos."],
+     img:["Packaging","Bodegón de empaque sobre fondo de color. Formato vertical."], go:null, anchor:"branding"},
+    {t:"Web y e-commerce.", p:"Entender cómo los clientes navegan y se relacionan con el sitio de su marca es crucial. Diseñamos y desarrollamos cualquier tipo de proyecto web.",
+     items:["UI y UX.","Diseño web.","E-commerce.","Páginas web.","Programación.","Landing pages.","Plataformas a la medida."],
+     img:["Sitio en dispositivos","Mockup de laptop, tablet y teléfono con el sitio corriendo."], go:null, anchor:"web"},
+    {t:"SEO y GEO.", p:"Que te encuentren en Google hoy y que la inteligencia artificial te mencione mañana. El trabajo de fondo que sostiene a todos los demás.",
+     items:["SEO técnico.","Contenido.","Link building.","SEO local.","Generative engine optimization.","Monitoreo en IA.","Reporte mensual."],
+     img:["Curva de crecimiento","Captura real de Search Console con la curva de tráfico orgánico."], go:"seo"}
+  ],
+  blocksNote:"Los seis primeros bloques son los capabilities tal como están en el deck de credenciales, con su propio texto. SEO y GEO se agrega porque es el servicio nuevo. Cada botón enlaza con el texto ancla exacto de la keyword objetivo de esa página. Creatividad, branding y web todavía no tienen página propia ni investigación de keywords: hay que decidir si entran al plan.",
+  dato:{big:"125+", t2:"marcas en siete países han confiado conceptos, campañas y activaciones a Conqr.", src:"Credenciales Conqr 2026 · México, EUA, Centroamérica, Caribe, Perú, Colombia y Brasil"},
+  stats:[["125+","Marcas atendidas"],["7","Países con operación"],["100+","Proyectos de branding en el último año"]],
+  procTitle:'Cómo <em>trabajamos.</em>',
+  proc:[["Diagnóstico","30 minutos sin costo. Te decimos si somos el proveedor correcto o no."],["Propuesta con números","Alcance, entregables, tiempos y precio. En una hoja."],["Ejecución con dueño","Un líder de cuenta, un canal, reportes quincenales."],["Revisión trimestral","Qué funcionó, qué no y qué cambiamos. Con datos a la vista."]],
+  faq:[
+    ["¿Qué hace exactamente una agencia de marketing digital?","Diseña y ejecuta la forma en que una marca consigue clientes por canales digitales: posicionamiento en buscadores, publicidad pagada, redes sociales, contenido y medición. En Conqr se suma la ejecución física —BTL, eventos y stands— bajo la misma estrategia y el mismo equipo."],
+    ["¿Cuánto cuesta contratar una agencia de marketing digital en México?","Una iguala mensual va de [X] a [Y] pesos según el número de canales y el volumen de contenido. Los proyectos por obra, como un stand o un evento, se cotizan aparte. Lo que mueve el precio: cuántos canales se trabajan, cuánto contenido se produce al mes y si hay producción física involucrada."],
+    ["¿Cómo elijo entre una agencia 360 y varios especialistas?","Varios especialistas suelen rendir mejor en un solo canal. Una agencia integral rinde mejor cuando la campaña cruza canales y alguien tiene que responder por el conjunto. Si tu operación incluye punto de venta, expos o eventos, el costo de coordinar tres proveedores suele superar la diferencia de honorarios."],
+    ["¿En cuánto tiempo se ven resultados?","Publicidad pagada: entre dos y cuatro semanas para tener datos accionables. SEO: entre cuatro y ocho meses para movimientos sostenidos. BTL y eventos: el resultado se mide al cierre de la ejecución. Cualquiera que prometa SEO en 30 días está vendiendo otra cosa."],
+    ["¿Trabajan por proyecto o por iguala?","Las dos. Los canales que necesitan continuidad —SEO, redes, pauta— funcionan por iguala mensual. La producción física se cotiza por proyecto con presupuesto cerrado."],
+    ["¿Qué incluye el diagnóstico sin costo?","Revisión de tu presencia actual, de tus competidores directos y de las búsquedas de tu categoría. Sales con una lista de lo que cambiaríamos primero, la uses con nosotros o no."],
+    ["¿Atienden fuera de la Ciudad de México?","Sí. La operación digital es nacional y la ejecución en piso cubre [N] estados. Para activaciones y eventos fuera de la zona metropolitana confirmamos cobertura y costos de traslado en el diagnóstico."]
+  ],
+  proseTitle:"Agencia de marketing digital en México",
+  prose:`<p>Una agencia de marketing digital se contrata para resolver un problema concreto: la marca no está donde su comprador la busca. Ese comprador hoy busca en Google, pregunta en ChatGPT, compara en Instagram y decide frente al anaquel o en el pasillo de una expo. Atender solo una de esas superficies deja la venta a medias.</p>
+<h3>Qué incluye el servicio</h3>
+<p>El trabajo digital se organiza en cuatro frentes. <b>Posicionamiento orgánico</b>: investigación de las búsquedas con intención de compra, arquitectura del sitio, contenido y autoridad. <b>Publicidad pagada</b>: campañas en Google y Meta medidas por costo por prospecto. <b>Redes sociales</b>: calendario, producción y comunidad. <b>Medición</b>: analítica conectada al CRM, para saber qué canal trajo qué cliente.</p>
+<p>La parte física se organiza en tres: activaciones y punto de venta, eventos corporativos, y stands para expos. Son disciplinas distintas, con proveedores y tiempos propios, pero comparten el brief con la parte digital.</p>
+<h3>Por qué separar digital y físico cuesta dinero</h3>
+<p>Cuando la campaña que llena el stand la hace una agencia y el stand lo monta otra, nadie responde por la conversión completa. El mensaje del anuncio no es el que dice la promotora, el registro del evento no se conecta con la fuente digital, y al cierre del trimestre el crédito se reparte a ojo. Trabajar las dos mitades con un solo equipo es la diferencia entre poder atribuir resultados y no poder.</p>
+<h3>Cómo elegir agencia</h3>
+<ul>
+<li>Pide el reporte que entregan, no el caso de éxito. El reporte dice cómo trabajan todos los meses.</li>
+<li>Pregunta quién ejecuta. Muchas agencias venden con seniors y operan con juniors.</li>
+<li>Exige rangos de precio por escrito antes de la propuesta formal.</li>
+<li>Confirma qué pasa con tus cuentas y tus datos si el contrato termina. Las cuentas publicitarias y el dominio tienen que quedar a tu nombre.</li>
+</ul>
+<h3>Cuánto cuesta</h3>
+<p>En México, una iguala de marketing digital para una empresa mediana va de [X] a [Y] pesos mensuales, sin contar la inversión publicitaria. Un stand para expo se cotiza por metro cuadrado y una activación por punto de venta y por semana. El rango se mueve por tres cosas: número de canales, volumen de contenido y si hay producción física.</p>
+<h3>Dónde opera Conqr</h3>
+<p>Cobertura regional, pensamiento global. Con base en la Ciudad de México y clientes en Estados Unidos, Centroamérica, Caribe, Perú, Colombia y Brasil. Más de 125 marcas han pasado por aquí desarrollando conceptos, campañas, estrategias digitales y activaciones.</p>`,
+  rel:["portafolio","seo","btl","stands","blog"],
+  ctaT:'Cuéntanos el reto. <em>Lo resolvemos juntos.</em>',
+  ctaS:"Una llamada de 30 minutos para entender qué necesitas y decirte si somos el equipo correcto."
+};
+
+/* ===================== REDES ===================== */
+P.redes = {
+  nav:"Social media", kicker:"Agencia de redes sociales · México",
+  h1:'Agencia de redes sociales que <em>conecta de verdad.</em>',
+  lede:"Publicar todos los días no es tener presencia. La diferencia está en si lo que publicas responde a algo que tu audiencia ya buscaba.",
+  heroPh:["Contenido en movimiento","Reel o carrusel corriendo en mockup de teléfono, sobre negro."],
+  note:"Keyword objetivo: agencia de redes sociales — 170/mes · KD 22. Esta página casi no va a traer tráfico: la demanda está en el blog (plan de redes sociales, 1.900/mes). Es página de conversión, no de captación.",
+  blocks:[
+    {t:"Estrategia.", p:"Pilares, tono y objetivos construidos sobre lo que tu audiencia ya busca y comenta, no sobre lo que suponemos.",
+     items:["Escucha social.","Pilares de contenido.","Líneas de tono.","Calendario anual.","Benchmark de competencia."],
+     img:["Tablero de estrategia","Captura del documento de estrategia o del calendario editorial."]},
+    {t:"Producción de contenido.", p:"Sesiones de foto y video periódicas para tener banco de material. Producido en casa, no comprado en stock.",
+     items:["Foto de producto.","Video vertical.","Reels y TikToks.","Motion y animación.","Copywriting.","Cobertura de eventos."],
+     img:["Detrás de cámaras","Foto documental de una sesión de producción propia."]},
+    {t:"Comunidad y pauta.", p:"Alguien respondiendo en el horario que acordamos por escrito, y campañas que llevan esa conversación a venta.",
+     items:["Community management.","Moderación y escalamiento.","Social ads.","Campañas con influencers.","Reporte mensual."],
+     img:["Conversación real","Captura de interacción con la comunidad, con datos difuminados."]}
+  ],
+  dato:{big:"[1.900]", t2:"búsquedas al mes de «plan de redes sociales». Solo 170 de «agencia de redes sociales».", src:"Semrush México · octubre 2026"},
+  stats:[["[9]","Marcas en redes"],["[120]","Piezas al mes"],["[7]","Plataformas activas"]],
+  platsTitle:"Donde está tu audiencia, estamos.",
+  plats:["Instagram","TikTok","LinkedIn","Facebook","YouTube","X","Pinterest"],
+  procTitle:'Cómo <em>trabajamos.</em>',
+  proc:[["Diagnóstico","Auditamos tus redes, tu competencia y tu audiencia para ubicar la oportunidad real."],["Estrategia","Definimos pilares, calendario, tono y los indicadores del proyecto."],["Producción","Creamos y publicamos: foto, video, copy y respuesta a la comunidad."],["Optimización","Medimos, comparamos y ajustamos cada mes con base en lo que funcionó."]],
+  faq:[
+    ["¿Qué hace una agencia de redes sociales?","Define la estrategia de contenido de una marca, produce las publicaciones, administra la conversación con la comunidad y mide el resultado. En Conqr eso incluye la producción propia de foto y video, no solo la programación de posts."],
+    ["¿Cuánto cuesta contratar una agencia de social media en México?","Las igualas van de [X] a [Y] pesos mensuales según el número de plataformas, la cantidad de piezas al mes y si la producción audiovisual es propia o con material del cliente. La pauta se cobra aparte y se invierte directo en la plataforma."],
+    ["¿Qué incluye el community management?","Respuesta a comentarios y mensajes directos en un tiempo acordado, moderación, escalamiento de quejas y reporte mensual de conversación. El horario de cobertura se fija en el contrato, porque es la causa número uno de desacuerdos con una agencia."],
+    ["¿Cuántas publicaciones al mes son suficientes?","No hay número universal. Importa más la consistencia y el formato correcto que el volumen: una marca con cuatro piezas buenas al mes supera a una con veinte improvisadas. La cantidad se define en la estrategia."],
+    ["¿Incluye la pauta publicitaria?","La gestión sí, la inversión no. El presupuesto de medios se paga directo a la plataforma desde una cuenta a tu nombre, para que las campañas y los datos sigan siendo tuyos si el contrato termina."],
+    ["¿Ustedes producen el contenido o yo lo mando?","Lo producimos. Hacemos sesiones de foto y video periódicas para tener banco de material. Si tienes contenido propio, se integra."],
+    ["¿Usan inteligencia artificial para crear el contenido?","La usamos para investigar temas, analizar conversación y acelerar variantes de copy. Las piezas finales las revisa y aprueba una persona, y la producción audiovisual es real. Una marca que publica contenido de IA sin revisar se nota, y se paga caro."]
+  ],
+  proseTitle:"Agencia de redes sociales para empresas",
+  prose:`<p>Una agencia de redes sociales se contrata por una de dos razones: la marca publica y no pasa nada, o la marca no publica porque nadie en el equipo tiene tiempo. Las dos se resuelven igual, con un plan escrito y una operación que no dependa de la inspiración del lunes.</p>
+<h3>Qué incluye una iguala de redes sociales</h3>
+<p>Una propuesta seria dice cantidades. Cuántas publicaciones de feed, cuántas historias, cuántos reels, cuántas sesiones de producción al mes, qué horario de respuesta tiene la comunidad y en qué fecha llega el reporte. Una iguala sin cantidades no se puede comparar contra otra, y por eso el prospecto termina decidiendo por precio.</p>
+<h3>Cuánto cuesta el manejo de redes sociales</h3>
+<p>En México el rango va de [X] a [Y] pesos mensuales. Lo que lo mueve: número de plataformas, volumen de piezas, si hay producción audiovisual propia, el horario de cobertura del community management y si se incluye gestión de pauta. La inversión publicitaria siempre va aparte.</p>
+<h3>Cómo se arma un plan de redes sociales</h3>
+<ul>
+<li><b>Escucha.</b> Qué se dice de tu categoría, qué pregunta tu audiencia, qué publica tu competencia y qué le funciona.</li>
+<li><b>Pilares.</b> Tres o cuatro territorios de contenido que la marca puede sostener todo el año sin repetirse.</li>
+<li><b>Calendario.</b> Fechas, formatos y responsables, publicado con un mes de anticipación.</li>
+<li><b>Producción.</b> Sesiones agrupadas para bajar el costo por pieza.</li>
+<li><b>Medición.</b> Alcance y comunidad sí, pero sobre todo tráfico, prospectos y ventas atribuidas.</li>
+</ul>
+<h3>Redes sociales y pauta: dos trabajos distintos</h3>
+<p>El contenido orgánico construye reconocimiento en plazos largos. La pauta compra atención hoy. Se potencian, pero se miden distinto y se presupuestan distinto. Si alguien te vende las dos como lo mismo, el reporte al final del mes no va a servir para decidir nada.</p>
+<h3>Qué plataformas conviene trabajar</h3>
+<p>Casi ninguna marca necesita siete plataformas. Instagram y TikTok para consumo, LinkedIn para B2B, YouTube cuando hay capacidad de video largo, Facebook cuando el comprador tiene más de 40 años. Abrir un perfil que luego se abandona daña más que no abrirlo.</p>`,
+  rel:["meta","home","portafolio","blog"],
+  ctaT:'¿Listos para que tus redes <em>conecten de verdad?</em>',
+  ctaS:"Cuéntanos de tu marca y te enviamos un diagnóstico de redes sin costo."
+};
+
+/* ===================== BTL ===================== */
+P.btl = {
+  nav:"BTL", kicker:"Agencia BTL · México",
+  h1:'Agencia BTL donde <em>se decide la compra.</em>',
+  lede:"Hay una parte de la compra que ninguna campaña digital alcanza: el momento en que alguien está frente a dos productos y elige uno.",
+  heroPh:["Activación en piso","Foto a sangre de una activación real: promotora, producto y consumidor."],
+  note:"Keyword objetivo: agencia btl — 260/mes · KD 17. Es la vertical con mejor relación volumen/dificultad del sitio: el cluster completo vive entre KD 6 y KD 24. Aquí Conqr puede estar en primera página mientras la Home sigue peleando.",
+  blocks:[
+    {t:"Activaciones de marca.", p:"Montaje, staff y experiencia en el punto donde tu comprador ya está decidiendo.",
+     items:["Activaciones en punto de venta.","Sampling y degustación.","Street marketing.","Marketing experiencial.","Rutas y roadshows."],
+     img:["Isla de activación","Foto frontal del montaje en tienda, con gente interactuando."], anchor:"activaciones"},
+    {t:"Promotoría y edecanes.", p:"Personal capacitado, uniformado y dado de alta. Con suplentes previstos y supervisión en ruta.",
+     items:["Promotores fijos.","Edecanes para eventos.","Demostradoras.","Capacitación de producto.","Supervisión y reporte."],
+     img:["Equipo en ruta","Documental del equipo trabajando en tienda."], anchor:"promotoria"},
+    {t:"Material POP y trade.", p:"Lo que sigue vendiendo cuando no hay nadie parado junto al producto.",
+     items:["Exhibidores de cartón.","Cabeceras y señalización.","Mobiliario de exhibición.","Trade marketing.","Shopper marketing."],
+     img:["Exhibidor en tienda","Producto en su material POP, foto de contexto real."], anchor:"pop"},
+    {t:"Medición en piso.", p:"El diferenciador frente a una agencia BTL tradicional: cada punto reporta y cada peso se puede defender.",
+     items:["Contactos por punto.","Costo por contacto.","Evidencia fotográfica diaria.","Incidencias en tiempo real.","Sell out cuando la cadena lo comparte."],
+     img:["Dashboard por tienda","Captura del reporte de ejecución con datos difuminados."], anchor:"medicion"}
+  ],
+  dato:{big:"[76]%", t2:"de los compradores cambia de marca frente al anaquel cuando alguien le explica el producto.", src:"Fuente por confirmar · el dato va con liga al estudio"},
+  stats:[["[180]","Puntos de venta cubiertos"],["[94k]","Contactos generados"],["[12]","Estados con operación"]],
+  procTitle:'Cómo ejecutamos <em>una activación.</em>',
+  proc:[["Brief y ruta","Objetivo, cadenas, puntos y fechas. Con mapa y calendario."],["Reclutamiento","Selección, capacitación y alta del personal. Con suplentes previstos."],["Ejecución","Supervisión en ruta y evidencia fotográfica diaria por punto."],["Reporte","Contactos, muestras, incidencias y costo por contacto, por tienda."]],
+  faq:[
+    ["¿Qué es BTL?","BTL —below the line— es la publicidad que no usa medios masivos: ocurre en punto de venta, en la calle, en un evento o directamente frente al consumidor. Su ventaja es el contacto uno a uno y la posibilidad de medir contactos reales, no impresiones estimadas."],
+    ["¿Cuál es la diferencia entre ATL y BTL?","ATL usa medios masivos —televisión, radio, exterior, prensa— y busca alcance. BTL busca contacto directo y conversión, con audiencias más chicas y medición más precisa. TTL combina las dos bajo una misma campaña."],
+    ["¿Cuánto cuesta una activación BTL?","Se cotiza por punto de venta y por semana. Las variables son el número de tiendas, los días de ejecución, cuánta gente trabaja por punto, el material POP y los traslados. Un piloto en [N] tiendas durante dos semanas arranca en [X] pesos."],
+    ["¿Dan de alta a los promotores y edecanes?","Sí. El personal se contrata con alta, seguro y uniforme. Es lo que separa a un proveedor formal de uno que subcontrata sin respaldo, y es lo que te protege si hay un incidente en tienda."],
+    ["¿Incluyen el material POP?","Lo diseñamos y lo fabricamos. Exhibidores, cabeceras, señalización y mobiliario. Se puede contratar solo la fabricación si la activación la opera otro proveedor."],
+    ["¿Cómo se mide una activación?","Contactos por punto, muestras entregadas, conversión a compra cuando la cadena comparte sell out, y costo por contacto. Todo con evidencia fotográfica fechada y geolocalizada por tienda."],
+    ["¿Trabajan con cadenas de autoservicio?","Sí. Manejamos el alta de personal y la negociación de espacio con las principales cadenas. Los tiempos de alta varían, así que conviene arrancar con [N] semanas de anticipación."]
+  ],
+  proseTitle:"Agencia BTL en México",
+  prose:`<p>El marketing BTL existe porque hay una parte de la decisión de compra que ninguna campaña digital alcanza: el momento en que alguien está parado frente a dos productos y elige uno. Ahí no hay segmentación ni retargeting; hay un exhibidor, un precio y, si la marca invirtió bien, alguien que explica por qué vale la pena.</p>
+<h3>Qué incluye el servicio BTL</h3>
+<p>Una agencia BTL completa cubre cinco cosas: la estrategia de ejecución, el reclutamiento y alta del personal, la fabricación del material, la supervisión en ruta y el reporte. Las agencias que solo ponen gente son brokers de personal, no agencias. La diferencia se nota en la tercera semana, cuando hay que resolver una ausencia en una tienda de Monterrey un sábado.</p>
+<h3>Tipos de ejecución BTL</h3>
+<ul>
+<li><b>Activación de marca.</b> Un montaje con staff que genera interacción y, casi siempre, prueba de producto.</li>
+<li><b>Promotoría.</b> Personal fijo en tienda que empuja venta y cuida el acomodo.</li>
+<li><b>Sampling y degustación.</b> Prueba directa, la herramienta más efectiva para producto nuevo.</li>
+<li><b>Material POP.</b> Exhibidores, cabeceras y señalización que trabajan cuando no hay nadie.</li>
+<li><b>Street marketing y guerrilla.</b> Intervenciones en vía pública, con el permiso correspondiente.</li>
+</ul>
+<h3>Cuánto cuesta y cómo se cotiza</h3>
+<p>El costo se arma por punto de venta y por semana: personal, uniformes, material, traslados, supervisión y reporte. Una activación nacional cuesta más por logística que por gente. Conviene empezar con un piloto en [N] tiendas, medir el costo por contacto real y después escalar con datos.</p>
+<h3>Cómo medir si funcionó</h3>
+<p>Un reporte BTL útil tiene cuatro números por tienda: contactos, muestras entregadas, incidencias y costo por contacto. Si la cadena comparte sell out, se agrega el quinto y el más importante: cuánto se movió el producto contra la semana anterior y contra las tiendas sin activación. Sin grupo de control, cualquier número es anécdota.</p>
+<h3>BTL y digital, juntos</h3>
+<p>La ventaja de contratar la activación con la misma agencia que lleva tu pauta es que el mensaje del anuncio y el guion de la promotora son el mismo, y el registro de la activación entra al mismo CRM. Esa continuidad es la que permite decir, al cierre del trimestre, qué parte del presupuesto trajo qué clientes.</p>`,
+  rel:["eventos","stands","home","portafolio","blog"],
+  ctaT:'¿Llevamos tu marca <em>al punto de venta?</em>',
+  ctaS:"Cuéntanos qué producto y en qué cadenas. Te armamos una ruta piloto."
+};
+
+/* ===================== EVENTOS ===================== */
+P.eventos = {
+  nav:"Eventos", kicker:"Agencia de eventos corporativos · México",
+  h1:'Agencia de eventos corporativos, <em>de la logística al desmontaje.</em>',
+  lede:"Una operación logística con fecha inamovible. Si el audio no funciona a las nueve de la mañana, no hay versión dos.",
+  heroPh:["Plano general del evento","Foto nocturna del salón montado, con iluminación encendida y gente."],
+  note:"Keyword objetivo: agencia de eventos corporativos — 70/mes · KD 10. La misma página captura «agencia de eventos» (390). El tráfico real está en los servicios: renta de mobiliario 3.600/mes y pantallas LED 720/mes con KD 9.",
+  blocks:[
+    {t:"Producción de eventos.", p:"Convenciones, lanzamientos y congresos. Del brief al desmontaje, con un responsable por área.",
+     items:["Convenciones de ventas.","Lanzamientos de producto.","Congresos y foros.","Eventos híbridos.","Protocolo y registro."],
+     img:["Escenario montado","Plano abierto del escenario con pantalla y luces encendidas."], anchor:"produccion"},
+    {t:"Fin de año y team building.", p:"Posadas, cenas de gala e integración. Se contratan en agosto, no en noviembre.",
+     items:["Posadas empresariales.","Fiestas de fin de año.","Cenas de gala.","Team building.","Viajes de incentivo."],
+     img:["Cena corporativa","Mesas vestidas, iluminación cálida, ambiente de celebración."], anchor:"finde"},
+    {t:"Renta de mobiliario y equipo.", p:"Inventario propio: menos costo y cero riesgo de que un proveedor externo falle el día del montaje.",
+     items:["Mobiliario para eventos.","Pantallas LED.","Audio e iluminación.","Escenarios y estructuras.","Carpas y mamparas."],
+     img:["Bodega o montaje","Foto del inventario o del equipo instalando la estructura."], anchor:"renta"}
+  ],
+  dato:{big:"[3.600]", t2:"búsquedas al mes de «renta de mobiliario para eventos». La cabeza de la categoría solo tiene 70.", src:"Semrush México · octubre 2026"},
+  stats:[["[140]","Eventos producidos"],["[8.000]","Asistentes en un evento"],["[24]","Horas de montaje promedio"]],
+  procTitle:'Cómo producimos <em>un evento.</em>',
+  proc:[["Brief y presupuesto","Objetivo, número de asistentes, fecha y rango de inversión. En una hoja."],["Venue y proveedores","Búsqueda, visita y cierre. Con dos opciones comparadas, no una."],["Producción","Montaje, pruebas y ensayo. Con checklist y responsable por área."],["Ejecución y cierre","Operación en sitio, desmontaje y reporte de resultados."]],
+  faq:[
+    ["¿Cuánto cuesta organizar un evento corporativo?","Se cotiza por asistente y por formato. Una convención de [N] personas con venue, alimentos, producción audiovisual y staff arranca en [X] pesos por persona. Lo que más mueve el precio: la fecha, el venue y si hay producción audiovisual mayor."],
+    ["¿Con cuánta anticipación hay que contratar?","Entre tres y seis meses para un evento mediano. Para posadas y fiestas de fin de año, los buenos venues se cierran en agosto y septiembre. Un evento contratado con menos de seis semanas se puede hacer, pero se paga más caro."],
+    ["¿Incluye el venue?","Lo buscamos, lo negociamos y lo cerramos a tu nombre, con al menos dos opciones comparadas. El costo del venue va por separado en el presupuesto, para que veas qué se va a producción y qué a renta de espacio."],
+    ["¿Tienen mobiliario y equipo propio?","[Confirmar]. El inventario propio reduce costo y elimina el riesgo de que un proveedor externo falle el día del montaje."],
+    ["¿Manejan eventos híbridos y streaming?","Sí. Transmisión, plataforma de registro y moderación de preguntas. La audiencia remota necesita su propio guion: un evento presencial transmitido sin adaptación pierde a la mitad de la gente en veinte minutos."],
+    ["¿Qué pasa si falla un proveedor el día del evento?","Cada área crítica —audio, energía, catering— tiene un plan B escrito antes del montaje. Es la parte del trabajo que no se ve y la única razón por la que se contrata a una productora."],
+    ["¿Atienden eventos fuera de la Ciudad de México?","Sí, en [N] estados. Fuera de la zona metropolitana se confirma cobertura, traslados y hospedaje del equipo en el presupuesto inicial."]
+  ],
+  proseTitle:"Agencia de eventos corporativos en México",
+  prose:`<p>Un evento corporativo es una operación logística con fecha inamovible. Esa es la diferencia con cualquier otro proyecto de marketing: si el audio no funciona a las nueve de la mañana, no hay versión dos. Por eso lo que se contrata en realidad no es creatividad, es previsión.</p>
+<h3>Tipos de eventos corporativos</h3>
+<ul>
+<li><b>Convención de ventas.</b> Alineación de equipo, resultados y plan del año. Mucha producción audiovisual.</li>
+<li><b>Lanzamiento de producto.</b> Prensa, clientes y un momento de revelación que tiene que quedar bien en foto.</li>
+<li><b>Congreso o foro.</b> Registro, acreditación, salas simultáneas y ponentes. La logística manda.</li>
+<li><b>Posada o fiesta de fin de año.</b> Entretenimiento y venue. Se contrata entre agosto y septiembre.</li>
+<li><b>Team building.</b> Actividades de integración con objetivo medible, no dinámicas por llenar la agenda.</li>
+</ul>
+<h3>Qué incluye la producción</h3>
+<p>Venue, montaje, mobiliario, audio, iluminación, pantallas, escenario, catering, protocolo, registro, staff, logística de traslados y desmontaje. Cada uno con responsable y con hora de entrega. Un presupuesto que no desglosa estas partidas esconde algo, casi siempre la renta del equipo.</p>
+<h3>Cuánto cuesta</h3>
+<p>El costo por asistente es la medida útil. Las variables que más lo mueven son la fecha —noviembre y diciembre cuestan más—, la ciudad, y si el evento necesita estructura, pantallas grandes o traslado de equipo. Para comparar dos cotizaciones, pide las dos en costo por asistente con el mismo alcance.</p>
+<h3>Calendario: el error más caro</h3>
+<p>Las empresas cierran proveedor de fin de año en septiembre, no en noviembre. Quien empieza a cotizar en octubre elige entre lo que sobró. Lo mismo pasa con convenciones de enero, que se arman en octubre. El calendario se trabaja hacia atrás desde la fecha, y el primer hito siempre es el venue.</p>
+<h3>Cómo se mide un evento</h3>
+<p>Asistencia contra registro, costo por asistente, satisfacción medida con encuesta en sitio y, cuando el evento es comercial, prospectos generados y oportunidades abiertas. Un evento sin registro conectado al CRM es un gasto que no se puede defender en la siguiente junta de presupuesto.</p>`,
+  rel:["stands","btl","home","portafolio","blog"],
+  ctaT:'¿Tienes fecha <em>y necesitas que salga bien?</em>',
+  ctaS:"Cuéntanos formato, número de asistentes y fecha. Te mandamos un estimado."
+};
+
+/* ===================== STANDS ===================== */
+P.stands = {
+  nav:"Stands", kicker:"Stands para expos · México",
+  h1:'Stands para expo que se ven caros <em>y no lo fueron.</em>',
+  lede:"Tu stand tiene un solo trabajo: detener a alguien que va caminando por un pasillo lleno de competidores.",
+  heroPh:["Render del stand","Imagen 3D del stand terminado. La pieza que vende esta página."],
+  note:"Corrección sobre la lista original: «stands corporativos» tiene 20 búsquedas al mes; «stand para expo», «stands para expos» y «stands para exposiciones» tienen 1.600 cada una. El H1 y la URL cambian a esa familia.",
+  blocks:[
+    {t:"Diseño y render.", p:"Nada se produce sin render aprobado. Y nada se diseña sin leer antes el reglamento del recinto.",
+     items:["Concepto y bocetos.","Render 3D.","Planos de fabricación.","Gráficos y señalización.","Diseño de iluminación."],
+     img:["Render 3D","Vista de esquina del stand, iluminación encendida, escala humana."], anchor:"diseno"},
+    {t:"Fabricación.", p:"Producción en taller con control de calidad antes de que la estructura salga a piso.",
+     items:["Stands a medida.","Stands modulares.","Stands portátiles.","Doble piso.","Mobiliario para stand."],
+     img:["Taller","Documental de la fabricación: materiales, acabados, armado de prueba."], anchor:"fabricacion"},
+    {t:"Renta y montaje.", p:"La misma calidad sin inversión de capital ni bodega, con el trámite del recinto resuelto.",
+     items:["Renta de stands.","Montaje y desmontaje.","Gestión de credenciales.","Almacenaje entre expos.","Traslados foráneos."],
+     img:["Montaje en piso","Equipo armando el stand en el recinto, antes de la apertura."], anchor:"renta"}
+  ],
+  dato:{big:"[1.600]", t2:"búsquedas al mes de «stand para expo». «Stands corporativos» solo tiene 20.", src:"Semrush México · octubre 2026"},
+  stats:[["[3×3]","Medida más solicitada"],["[14]","Días de fabricación"],["[6]","Expos al año en promedio"]],
+  procTitle:'De la medida <em>a la expo.</em>',
+  proc:[["Brief y medidas","Espacio contratado, reglamento de la expo y objetivo del stand."],["Render","Propuesta 3D y ajustes. Nada se produce sin render aprobado."],["Fabricación","Producción en taller con control de calidad antes de salir."],["Montaje","Armado en piso, pruebas y desmontaje al cierre."]],
+  faq:[
+    ["¿Cuánto cuesta un stand para expo?","Se cotiza por metro cuadrado. Un stand de 3×3 arranca en [X] pesos y uno a medida de isla puede multiplicar eso varias veces. Lo que mueve el precio: materiales, altura, iluminación, si lleva doble piso y si es renta o compra."],
+    ["¿Con cuánta anticipación hay que pedirlo?","Entre cuatro y seis semanas para un stand modular y de seis a diez para uno a medida. Las expos grandes concentran la demanda de todos los fabricantes en las mismas fechas, así que pedirlo tarde cuesta más y limita los materiales disponibles."],
+    ["¿Se puede reutilizar en otra expo?","Un stand modular sí, y es la razón por la que conviene si participas en más de dos expos al año. Un stand a medida se puede adaptar, pero no siempre sale más barato que fabricar uno nuevo."],
+    ["¿Qué medidas se manejan?","Las más comunes en México son 3×2, 3×3, 3×6 e islas de 6×6 en adelante. La medida la define el espacio que contrataste con la expo, y cada recinto tiene su propio reglamento de alturas y materiales."],
+    ["¿Incluye montaje y desmontaje?","Sí, y también la gestión de credenciales y horarios con el recinto. Es el trámite que más retrasos causa cuando lo hace alguien sin experiencia en ese recinto."],
+    ["¿Rentar o comprar?","Compra si participas en más de tres expos al año y tienes dónde almacenarlo. Renta si es tu primera expo, si cambias de formato seguido o si no quieres el costo de bodega y mantenimiento."],
+    ["¿Hacen solo el diseño o solo la fabricación?","Las dos por separado. Si ya tienes render aprobado, cotizamos solo producción y montaje."]
+  ],
+  proseTitle:"Stands para expos y ferias",
+  prose:`<p>Un stand tiene un trabajo medible: detener a alguien que va caminando por un pasillo lleno de competidores. Todo lo demás —el acabado, la iluminación, el mobiliario— existe para eso. Por eso el error más caro en una expo no es gastar de más en el stand, es gastar bien en un stand que nadie ve porque quedó a la altura equivocada.</p>
+<h3>Qué define el costo</h3>
+<ul>
+<li><b>Metros cuadrados.</b> La base de toda cotización.</li>
+<li><b>Material.</b> Melamina, madera, aluminio, estructura. Cambia precio, peso y tiempo de montaje.</li>
+<li><b>Altura e iluminación.</b> Lo que hace que el stand se vea desde el otro extremo del pasillo.</li>
+<li><b>Renta o compra.</b> La renta elimina el costo de bodega, mantenimiento y traslado entre expos.</li>
+<li><b>Reutilización.</b> Un modular bien diseñado se amortiza en la tercera expo.</li>
+</ul>
+<h3>El proceso, con tiempos reales</h3>
+<p>Brief y medidas: dos días. Render y ajustes: de cinco a ocho días. Fabricación: de dos a cuatro semanas según material. Montaje: de uno a tres días antes de la apertura, dentro de la ventana que marca el recinto. Ese calendario se trabaja hacia atrás desde la fecha de la expo, y el render aprobado es el hito que no se puede mover.</p>
+<h3>Reglamentos que casi nadie lee</h3>
+<p>Cada recinto tiene su propio reglamento: altura máxima, materiales permitidos, horarios de montaje y desmontaje, acceso de vehículos y credenciales del personal. Un diseño que ignora el reglamento se corrige en piso, a costa del expositor y con prisa. Leerlo antes del render ahorra más dinero que negociar el precio del material.</p>
+<h3>Qué poner dentro del stand</h3>
+<p>Un mensaje legible a seis metros, producto a la vista, un lugar donde sentarse a cerrar y una forma de capturar datos que no sea una hoja de papel. El registro digital conectado al CRM convierte la expo de un gasto de presencia a una fuente de prospectos medible.</p>
+<h3>Expos donde trabajamos</h3>
+<p>Operamos en los principales recintos de la Ciudad de México, Guadalajara y Monterrey. [Listar recintos y expos recurrentes: es contenido local que posiciona y que la IA cita cuando alguien pregunta por proveedores de stands en una expo concreta.]</p>`,
+  rel:["eventos","btl","home","portafolio","blog"],
+  ctaT:'¿Ya tienes tu espacio <em>para la próxima expo?</em>',
+  ctaS:"Dinos medida, recinto y fecha. Te mandamos propuesta con render."
+};
+
+/* ===================== SEO ===================== */
+P.seo = {
+  nav:"SEO", kicker:"Agencia SEO · México",
+  h1:'Agencia SEO que reporta <em>clientes, no posiciones.</em>',
+  lede:"Subir del lugar 14 al 7 no le sirve a nadie si no entra una llamada.",
+  heroPh:["Curva de crecimiento","Captura real de Search Console con la curva de tráfico orgánico."],
+  note:"Keyword objetivo: agencia seo — 1.000/mes · KD 54. La página hermana /agencia-seo-cdmx/ tiene 3.600/mes: la URL con más demanda de todo el sitio. Verificar la SERP antes de construir toda la estrategia encima de ese dato.",
+  blocks:[
+    {t:"Diagnóstico y técnica.", p:"Primero quitamos lo que impide que te lean. Es la parte menos vistosa y la que más rápido mueve.",
+     items:["Auditoría SEO.","Velocidad y Core Web Vitals.","Indexación y rastreo.","Arquitectura de información.","Datos estructurados."],
+     img:["Auditoría","Página del documento de auditoría con los hallazgos priorizados."], anchor:"tecnica"},
+    {t:"Contenido y arquitectura.", p:"Una página por intención, sin canibalización. Escrito para humanos y legible para máquinas.",
+     items:["Investigación de palabras clave.","Mapa de contenidos.","Redacción SEO.","Optimización on page.","Contenido para blog."],
+     img:["Mapa de contenidos","Diagrama de la arquitectura del sitio por intención de búsqueda."], anchor:"contenido"},
+    {t:"Autoridad y SEO local.", p:"El trabajo de fondo: que otros te citen y que aparezcas cuando alguien busca cerca de ti.",
+     items:["Link building.","Menciones y relaciones públicas.","Google Business Profile.","Reseñas.","Posicionamiento en Maps."],
+     img:["Ficha local","Captura de la ficha de Google Business Profile completa."], anchor:"autoridad"}
+  ],
+  dato:{big:"[3.600]", t2:"búsquedas al mes de «agencia SEO CDMX». Más del triple que la versión sin ciudad.", src:"Semrush México · octubre 2026"},
+  stats:[["[+312%]","Tráfico orgánico en 9 meses"],["[1.400]","URLs corregidas"],["[24]","Artículos publicados"]],
+  procTitle:'Cómo trabajamos <em>el SEO.</em>',
+  proc:[["Auditoría","Técnica, de contenido y de competencia. Con lista priorizada."],["Arquitectura","Qué página responde a qué búsqueda, sin canibalización."],["Producción","Contenido y correcciones técnicas, por sprints mensuales."],["Autoridad","Enlaces, menciones y señales locales. El trabajo de fondo."]],
+  faq:[
+    ["¿Qué es el SEO y cómo funciona?","SEO es el trabajo de hacer que un sitio aparezca en los resultados no pagados de un buscador. Funciona sobre tres ejes: que la página sea técnicamente legible, que su contenido responda mejor que el de la competencia a lo que la gente busca, y que otros sitios la citen."],
+    ["¿Cuánto cuesta el SEO en México?","Entre [X] y [Y] pesos mensuales según la competencia del sector y el tamaño del sitio. Un proyecto local cuesta menos que uno nacional, y un ecommerce con miles de productos cuesta más. Por debajo de cierto rango lo que se compra es contenido, no posicionamiento."],
+    ["¿En cuánto tiempo se ven resultados?","Las correcciones técnicas se reflejan en semanas. El contenido nuevo tarda de tres a seis meses en madurar. Un sector muy peleado puede tomar más de un año. Quien promete primera posición en 30 días está vendiendo otra cosa."],
+    ["¿Garantizan la primera posición en Google?","No, y nadie puede. Google no vende posiciones orgánicas ni acepta acuerdos con agencias. Lo que sí se puede comprometer es el trabajo: qué se audita, qué se corrige, cuánto contenido se publica y cómo se reporta."],
+    ["¿SEO o Google Ads?","Google Ads compra atención hoy y deja de traerla cuando se apaga. El SEO tarda meses pero el activo se queda. La mayoría de las empresas necesitan las dos: pauta para cubrir el presente, orgánico para bajar el costo de adquisición a futuro."],
+    ["¿Qué pasa si dejo de pagar el SEO?","El sitio no cae de golpe: conserva posiciones un tiempo y las pierde gradualmente conforme la competencia sigue publicando. Lo que ya se construyó —arquitectura, contenido, enlaces— sigue siendo tuyo."],
+    ["¿Trabajan SEO para ecommerce?","Sí. Es un trabajo distinto: fichas de producto, categorías, facetas, datos estructurados y control de contenido duplicado a escala. Se cotiza por número de SKUs y plataforma."]
+  ],
+  proseTitle:"Agencia SEO en México",
+  prose:`<p>El posicionamiento web es la única fuente de tráfico que no deja de funcionar cuando se apaga el presupuesto. También la que más tarda. Esa tensión define todo el servicio: el SEO no es una campaña, es una inversión con curva.</p>
+<h3>Por qué tu sitio no aparece</h3>
+<ul>
+<li><b>Nadie investigó qué busca tu comprador.</b> El sitio habla con las palabras de la empresa, no con las del cliente.</li>
+<li><b>El sitio es lento o está mal estructurado.</b> Si Google no lo lee bien, el contenido no importa.</li>
+<li><b>No hay contenido suficiente.</b> Cinco páginas no compiten contra sitios con doscientas.</li>
+<li><b>Nadie te enlaza.</b> Sin menciones de otros sitios, la autoridad no sube.</li>
+<li><b>Canibalización.</b> Tres páginas peleando por la misma búsqueda se estorban entre ellas.</li>
+</ul>
+<h3>Cómo se mide</h3>
+<p>Las posiciones son un indicador intermedio, no el resultado. Lo que se reporta cada mes: tráfico orgánico por página, búsquedas que lo generan, prospectos atribuidos al canal orgánico y costo por prospecto comparado con la pauta. Un reporte que solo muestra posiciones está escondiendo que no hay conversiones.</p>
+<h3>SEO local</h3>
+<p>Para negocios con presencia física, el SEO local pesa más que el nacional. Incluye la ficha de Google Business Profile completa y activa, reseñas gestionadas, datos de contacto consistentes en directorios y páginas propias por ciudad con contenido real, no la misma página con el nombre cambiado.</p>
+<h3>Qué cambió con la IA en los buscadores</h3>
+<p>Google ya responde muchas búsquedas sin mandar clic a ningún sitio, y una parte de tus compradores pregunta directamente en ChatGPT. Eso no mata al SEO: cambia el objetivo. Ya no basta con posicionar, hay que ser la fuente que el modelo cita. El trabajo se parece: contenido claro, estructurado, con datos verificables y autoría visible.</p>
+<h3>Qué pedirle a una agencia SEO antes de firmar</h3>
+<p>El plan de los primeros 90 días por escrito, un ejemplo del reporte mensual que entregan, el nombre de quién va a ejecutar, y la confirmación de que el sitio, el dominio y los accesos quedan a tu nombre. Una agencia que no entrega esas cuatro cosas antes de firmar tampoco las va a entregar después.</p>`,
+  rel:["geo","google","home","portafolio","blog"],
+  ctaT:'¿Quieres saber <em>por qué no apareces?</em>',
+  ctaS:"Te hacemos una auditoría SEO sin costo y te decimos qué corregir primero."
+};
+
+/* ===================== GOOGLE ADS ===================== */
+P.google = {
+  nav:"Google Ads", kicker:"Agencia de Google Ads · México",
+  h1:'Agencia de Google Ads que te dice <em>cuánto cuesta cada cliente.</em>',
+  lede:"La demanda por lo que vendes ya existe y alguien la está capturando hoy. La única pregunta es a qué precio.",
+  heroPh:["Panel de campaña","Captura del administrador con el costo por prospecto a la vista."],
+  note:"Keyword objetivo: agencia de google ads — 260/mes · KD 37. Semrush marca intención informacional: quien busca esto encuentra guías, no agencias. Por eso la página enseña primero y vende después.",
+  blocks:[
+    {t:"Campañas.", p:"Cada formato sirve para un momento distinto del comprador. No todos convienen a todos los negocios.",
+     items:["Búsqueda.","Performance Max.","Shopping.","YouTube Ads.","Display y remarketing.","Campañas locales."],
+     img:["Anuncio en resultados","Captura de la SERP con el anuncio real de un cliente."], anchor:"campanas"},
+    {t:"Estructura y optimización.", p:"La parte aburrida que más dinero ahorra: negativas, pujas y creativos revisados cada semana.",
+     items:["Auditoría de cuenta.","Estructura de campañas.","Palabras negativas.","Pruebas de anuncios.","Ajuste de pujas."],
+     img:["Estructura de cuenta","Diagrama de campañas, grupos y anuncios."], anchor:"estructura"},
+    {t:"Medición.", p:"Sin conversiones bien configuradas, la optimización es a ciegas. Aquí empieza el trabajo, no termina.",
+     items:["Conversiones en GA4.","Google Tag Manager.","Conexión al CRM.","Dashboard en Looker Studio.","Atribución por canal."],
+     img:["Dashboard","Reporte en vivo con los datos del cliente difuminados."], anchor:"medicion"}
+  ],
+  dato:{big:"[1.842]", t2:"pesos de CPC promedio en «posicionamiento en Google». Hay sectores donde cada clic cuesta una comida.", src:"Semrush México · octubre 2026"},
+  stats:[["[-38%]","Costo por prospecto"],["[4.2x]","Retorno de inversión"],["[90]","Días de optimización"]],
+  procTitle:'Cómo arrancamos <em>una cuenta.</em>',
+  proc:[["Auditoría","Revisión de la cuenta actual, desperdicio y oportunidades."],["Estructura","Campañas, grupos y palabras negativas. La base de todo."],["Medición","Conversiones en GA4, Tag Manager y conexión al CRM."],["Optimización","Ajuste semanal de pujas, creativos y negativas."]],
+  faq:[
+    ["¿Qué es Google Ads y cómo funciona?","Es el sistema de publicidad de Google. Compites en una subasta por aparecer cuando alguien busca algo relacionado con lo que vendes, y pagas por clic. Lo que determina si apareces no es solo la puja, también la relevancia del anuncio y la calidad de la página a la que lleva."],
+    ["¿Cuánto cuesta anunciarse en Google?","Hay dos costos distintos. La inversión en Google, que se paga directo a la plataforma y arranca de forma útil en [X] pesos mensuales según el sector. Y el honorario de la agencia, que cobramos como [porcentaje o monto fijo]. El costo por clic varía muchísimo entre industrias."],
+    ["¿Cuál es el presupuesto mínimo recomendado?","Por debajo de cierto monto la campaña no junta datos suficientes para optimizarse y el dinero se gasta aprendiendo. En la mayoría de los sectores ese piso está en [X] pesos mensuales. Si tu presupuesto está por debajo, conviene concentrarlo en una sola campaña de búsqueda."],
+    ["¿SEO o Google Ads, qué conviene primero?","Google Ads si necesitas prospectos este mes. SEO si quieres bajar el costo de adquisición a doce meses. La combinación habitual es arrancar con pauta y construir orgánico en paralelo, bajando la pauta conforme el orgánico entrega."],
+    ["¿Por qué mi campaña no convierte?","Las causas más comunes: palabras clave demasiado amplias sin negativas, la página de destino no corresponde al anuncio, el formulario pide demasiado, o las conversiones están mal configuradas y en realidad sí convierte pero no se registra."],
+    ["¿Son Google Partner?","[Confirmar]. La insignia certifica inversión gestionada y exámenes aprobados. Es útil como filtro pero no garantiza resultados: pide ver un reporte real antes de decidir."],
+    ["¿Las cuentas quedan a mi nombre?","Sí. La cuenta publicitaria, el método de pago y los datos históricos son tuyos. Si el contrato termina, te quedas con todo el aprendizaje de la cuenta."]
+  ],
+  proseTitle:"Agencia de Google Ads en México",
+  prose:`<p>Google Ads es el canal más rápido para probar si existe demanda para lo que vendes. En dos semanas sabes cuánta gente busca tu categoría, qué están dispuestos a pagar tus competidores por ese clic y si tu oferta convierte. Esa velocidad es la ventaja; también es la razón por la que se desperdicia tanto dinero cuando la cuenta no está bien armada.</p>
+<h3>Dónde se va el presupuesto sin que nadie se dé cuenta</h3>
+<ul>
+<li><b>Sin palabras negativas.</b> Pagas por búsquedas de gente que nunca iba a comprar.</li>
+<li><b>Concordancia amplia sin control.</b> Google decide por ti qué es relevante, y amplía de más.</li>
+<li><b>Una sola campaña para todo.</b> Mezcla intenciones distintas y el presupuesto se va a la más barata, no a la más rentable.</li>
+<li><b>Conversiones mal configuradas.</b> El algoritmo optimiza hacia la señal equivocada.</li>
+<li><b>Página de destino genérica.</b> Se paga el clic y se pierde en la página.</li>
+</ul>
+<h3>Cómo se estructura una cuenta sana</h3>
+<p>Campañas separadas por intención y por margen, grupos de anuncios con pocas palabras clave muy relacionadas, al menos tres anuncios por grupo en rotación, extensiones completas, y una lista de negativas que crece cada semana con los términos de búsqueda reales. Esa última tarea es aburrida y es la que más dinero ahorra.</p>
+<h3>Medición: la mitad del trabajo</h3>
+<p>Sin conversiones bien configuradas en GA4 y sin los prospectos conectados al CRM, la optimización es a ciegas. Lo mínimo: conversión por formulario, por llamada y por WhatsApp, cada una con su valor, y un reporte que distinga prospecto de cliente. El objetivo no es bajar el costo por clic, es bajar el costo por cliente que cierra.</p>
+<h3>Qué reportamos cada mes</h3>
+<p>Inversión, prospectos, costo por prospecto, calidad de esos prospectos según tu equipo de ventas, y qué campañas se apagaron y por qué. Un reporte que celebra el aumento de clics sin mencionar el costo por prospecto no sirve para decidir el presupuesto del mes siguiente.</p>`,
+  rel:["meta","seo","home","portafolio","blog"],
+  ctaT:'¿Revisamos tu cuenta <em>antes de que gastes otro mes?</em>',
+  ctaS:"Auditoría de tu cuenta de Google Ads sin costo, con los desperdicios señalados."
+};
+
+/* ===================== META ADS ===================== */
+P.meta = {
+  nav:"Meta Ads", kicker:"Agencia de Facebook Ads · México",
+  h1:'Agencia de Facebook Ads: creativo, segmentación <em>y medición.</em>',
+  lede:"En Meta nadie llegó buscándote. Compites por atención en un feed, y eso lo decide el creativo antes que la segmentación.",
+  heroPh:["Anuncio en el feed","Mockup de teléfono con el anuncio corriendo en Instagram."],
+  note:"Keyword objetivo: agencia de facebook ads — 320/mes · KD 21. «agencia facebook ads» (30) tiene KD 11 y entra como secundaria. Descartadas por navegacionales: meta business suite (40.500) y administrador de anuncios (4.400).",
+  blocks:[
+    {t:"Producción creativa.", p:"Los algoritmos ya encuentran a la gente correcta. Lo que no pueden hacer es volver interesante un anuncio aburrido.",
+     items:["Video vertical.","Foto de producto.","UGC con creadores.","Motion y animación.","Copywriting.","Pruebas de creativo."],
+     img:["Tanda de creativos","Grid de las piezas probadas en el mes, con la ganadora marcada."], anchor:"creativo"},
+    {t:"Campañas y segmentación.", p:"Estructura simple, presupuesto concentrado y suficientes conversiones para que el algoritmo aprenda.",
+     items:["Públicos personalizados.","Públicos similares.","Retargeting.","Advantage+.","Campañas de prospección."],
+     img:["Administrador de anuncios","Captura de la estructura de campañas con resultados."], anchor:"campanas"},
+    {t:"Medición y cuentas.", p:"Después de los cambios de privacidad, el píxel solo ya no alcanza. Y una cuenta caída detiene la venta de un día para otro.",
+     items:["Píxel de Facebook.","API de Conversiones.","Catálogo de productos.","Recuperación de cuentas.","Conexión al CRM."],
+     img:["Eventos configurados","Captura del administrador de eventos con la API activa."], anchor:"medicion"}
+  ],
+  dato:{big:"[70]%", t2:"del resultado en Meta lo decide el creativo, no la segmentación.", src:"Dato por confirmar con fuente propia o de Meta"},
+  stats:[["[18]","Creativos probados al mes"],["[-41%]","Costo por prospecto"],["[3]","Plataformas en una cuenta"]],
+  procTitle:'Cómo <em>arrancamos.</em>',
+  proc:[["Auditoría","Cuenta, píxel, catálogo y creativos anteriores."],["Medición","API de Conversiones y eventos bien definidos antes de invertir."],["Producción","Primera tanda de creativos en los formatos que importan."],["Iteración","Prueba, lectura y escalamiento de lo que funcionó."]],
+  faq:[
+    ["¿Qué es Meta Ads?","Es la plataforma publicitaria de Facebook, Instagram, Messenger y WhatsApp. Se administra desde una sola cuenta y permite segmentar por intereses, comportamiento y públicos propios, además de reconstruir audiencias parecidas a tus mejores clientes."],
+    ["¿Cuánto cuesta anunciarse en Facebook?","La inversión mínima útil arranca en [X] pesos mensuales; por debajo de eso la campaña no sale de la fase de aprendizaje. El honorario de la agencia se cobra como [porcentaje o monto fijo]. El costo por prospecto depende sobre todo del sector y del creativo."],
+    ["¿Facebook Ads o Google Ads?","Google captura demanda que ya existe: alguien está buscando lo que vendes. Meta genera demanda: le muestra tu producto a quien todavía no lo buscaba. Para servicios con búsqueda clara, Google primero. Para producto visual o categoría nueva, Meta."],
+    ["¿Por qué no convierte mi campaña?","En orden de frecuencia: el creativo no detiene el scroll, el público es demasiado amplio o demasiado chico, la medición está mal instalada, o la oferta no es clara en los primeros tres segundos. Casi nunca es la segmentación sola."],
+    ["¿Instalan el píxel y la API de Conversiones?","Sí, las dos. Después de los cambios de privacidad de iOS, el píxel solo ya no alcanza: la API de Conversiones recupera una parte importante de los eventos que se pierden. Sin ella, estás optimizando con datos incompletos."],
+    ["Mi cuenta publicitaria está restringida, ¿pueden ayudarme?","Sí. Diagnosticamos la causa, preparamos la apelación y, si procede, reconstruimos la estructura para evitar que se repita. No hay garantía de reactivación: depende del motivo y del historial."],
+    ["¿Quién produce los creativos?","Nosotros. Foto, video y copy, con sesiones periódicas para tener banco de material. Una cuenta que pauta siempre los mismos tres anuncios se agota en semanas."]
+  ],
+  proseTitle:"Agencia de Facebook Ads y Meta Ads",
+  prose:`<p>En Meta no compites por una búsqueda, compites por atención en un feed donde nadie llegó buscándote. Eso cambia todo: la segmentación importa menos de lo que se cree y el creativo importa más de lo que la mayoría de las agencias está dispuesta a admitir, porque producir creativo cuesta y configurar campañas no.</p>
+<h3>Por qué el creativo manda</h3>
+<p>Los algoritmos de Meta ya encuentran solos a la gente adecuada si tienen una señal clara de conversión. Lo que no pueden hacer es volver interesante un anuncio aburrido. Una cuenta sana prueba varias piezas nuevas al mes, en formatos nativos, y mata rápido lo que no detiene el scroll en los primeros tres segundos.</p>
+<h3>Medición después de iOS</h3>
+<ul>
+<li><b>Píxel.</b> Sigue siendo la base, pero ya no ve todo.</li>
+<li><b>API de Conversiones.</b> Manda los eventos desde tu servidor y recupera lo que el navegador bloquea.</li>
+<li><b>Eventos bien definidos.</b> Compra, prospecto y contacto, cada uno con su valor.</li>
+<li><b>Catálogo.</b> Indispensable para ecommerce y para campañas dinámicas.</li>
+</ul>
+<h3>Estructura de campaña</h3>
+<p>Una estructura simple rinde más que una complicada: pocas campañas, presupuesto concentrado y suficientes conversiones para salir de aprendizaje. Partir el presupuesto en diez conjuntos de anuncios es la forma más común de impedir que el algoritmo aprenda.</p>
+<h3>Cuentas restringidas</h3>
+<p>Una cuenta inhabilitada detiene la venta de un día para otro, y la mayoría de las empresas no tiene plan para eso. Las causas frecuentes: políticas de salud o finanzas mal interpretadas, cambios bruscos de método de pago, o una página con historial de reportes. Tener una cuenta secundaria configurada y verificada antes de necesitarla ahorra semanas.</p>
+<h3>Qué reportamos</h3>
+<p>Inversión, prospectos o ventas, costo por resultado, qué creativo ganó y por qué, y qué se va a probar el mes siguiente. El reporte que importa compara contra el mes anterior y contra el costo del mismo prospecto en Google.</p>`,
+  rel:["google","redes","home","portafolio","blog"],
+  ctaT:'¿Revisamos tu cuenta <em>publicitaria?</em>',
+  ctaS:"Auditoría de tu cuenta de Meta sin costo, con creativos y medición revisados."
+};
+
+/* ===================== GEO ===================== */
+P.geo = {
+  nav:"GEO · IA", kicker:"Agencia GEO · Posicionamiento en IA",
+  h1:'Agencia GEO: que la IA te mencione <em>cuando preguntan por ti.</em>',
+  lede:"Tus clientes ya le preguntan a ChatGPT qué proveedor contratar. En esa respuesta caben dos o tres marcas.",
+  heroPh:["Respuesta de IA","Captura de una conversación donde el modelo recomienda marcas, con la tuya señalada."],
+  note:"Keyword objetivo: geo seo — 30/mes · KD 15. Única página del sitio que no se justifica por volumen: «agencia geo» y «posicionamiento en chatgpt» salen sin métricas en México. Se justifica por autoridad, por citas en IA y como opción barata sobre una tendencia.",
+  blocks:[
+    {t:"Diagnóstico de visibilidad.", p:"Antes de cambiar nada, saber en qué preguntas apareces hoy y contra quién compites.",
+     items:["Mapa de preguntas reales.","Medición base en seis modelos.","Comparativa con competidores.","Fuentes que cita el modelo."],
+     img:["Tablero de prompts","Lista de preguntas con la marca marcada donde aparece."], anchor:"diagnostico"},
+    {t:"Contenido citable.", p:"Los modelos citan explicaciones con datos verificables, no páginas comerciales con adjetivos.",
+     items:["Respuestas directas.","Datos con fuente y fecha.","Autoría visible.","Preguntas frecuentes con schema.","Contenido en el HTML, no en JavaScript."],
+     img:["Pieza citada","Captura del modelo citando una página del cliente como fuente."], anchor:"contenido"},
+    {t:"Señales técnicas y monitoreo.", p:"Que el modelo entienda qué eres, dónde operas y qué publicas. Y un reporte mensual de si funcionó.",
+     items:["Datos estructurados.","Entidades y consistencia.","Archivo llms.txt.","Presencia en fuentes externas.","Reporte mensual de prompts."],
+     img:["Tráfico desde IA","GA4 con el referrer de chatgpt.com y perplexity.ai separado."], anchor:"tecnica"}
+  ],
+  dato:{big:"[0]", t2:"búsquedas al mes de «posicionamiento en ChatGPT» en México. Por eso esta página se escribe hoy y no en dos años.", src:"Semrush México · octubre 2026"},
+  stats:[["[120]","Prompts monitoreados"],["[6]","Modelos revisados"],["[30]","Días por ciclo de reporte"]],
+  procTitle:'Cómo <em>trabajamos.</em>',
+  proc:[["Mapa de preguntas","Las preguntas reales que haría tu comprador sobre tu categoría."],["Medición base","Dónde apareces hoy, en qué modelos y contra quién."],["Contenido y señales","Lo que hay que publicar y corregir para ser citable."],["Reporte mensual","Qué cambió, qué ganaste y qué sigue."]],
+  faq:[
+    ["¿Qué es GEO?","GEO —generative engine optimization— es el trabajo de hacer que los motores con inteligencia artificial citen tu marca al responder preguntas de tu categoría. Comparte bases con el SEO, pero el objetivo cambia: no buscas una posición en una lista, buscas ser la fuente de una respuesta."],
+    ["¿Cómo aparezco en ChatGPT?","Los modelos construyen sus respuestas con contenido que pueden leer y verificar. Lo que mueve la aguja: información clara y estructurada en tu sitio, presencia en fuentes externas confiables, consistencia de los datos de la marca, y contenido que responda la pregunta de forma directa en las primeras líneas."],
+    ["¿Por qué ChatGPT no menciona mi marca?","Las causas habituales: tu sitio no tiene contenido que responda esas preguntas, el contenido está detrás de JavaScript que el modelo no ejecuta, no existe información tuya en fuentes externas, o tus datos de marca son inconsistentes entre directorios."],
+    ["¿GEO reemplaza al SEO?","No. Comparten la mayor parte del trabajo: contenido claro, estructura técnica limpia y autoridad. GEO agrega la parte de ser citable y la medición por preguntas en vez de por posiciones. Quien venda GEO como un servicio sin SEO está vendiendo humo."],
+    ["¿En cuánto tiempo se ve?","Los modelos con búsqueda en vivo pueden reflejar cambios en semanas. Los que dependen del entrenamiento tardan mucho más. Por eso el reporte se hace sobre prompts monitoreados y no sobre una fecha prometida."],
+    ["¿Cómo se mide si está funcionando?","Con un tracker de prompts: una lista fija de preguntas que se consulta cada mes en varios modelos, registrando si tu marca aparece, en qué lugar y con qué fuente. Y en GA4, separando las visitas que llegan con referrer de IA."],
+    ["¿Qué es llms.txt?","Un archivo en la raíz del sitio que lista sus páginas principales con una línea de qué contiene cada una, para que los modelos entiendan la estructura sin adivinar. Es barato de implementar y todavía poco usado en México."]
+  ],
+  proseTitle:"Posicionamiento en inteligencia artificial",
+  prose:`<p>Hay una pregunta que conviene hacerse antes de invertir un peso en esto: ¿cuánta gente está preguntándole a una IA por tu categoría? En México, hoy, para la mayoría de los sectores la respuesta es «poca, pero creciendo rápido». Eso no vuelve al GEO urgente; lo vuelve barato. El costo de estar presente en una categoría donde casi nadie publicó todavía es una fracción de lo que costará competir cuando todos lo hagan.</p>
+<h3>Qué cambia respecto al SEO</h3>
+<p>En un buscador peleas por un lugar en una lista de diez. En un modelo de lenguaje peleas por ser una de las dos o tres marcas que menciona una respuesta en prosa. No hay segunda página: o apareces o no existes. Y el usuario no compara diez opciones, acepta las que le dieron.</p>
+<h3>Qué hace que una marca sea citable</h3>
+<ul>
+<li><b>Responder la pregunta en las primeras líneas,</b> sin introducción.</li>
+<li><b>Datos concretos con fuente y fecha.</b> Los modelos prefieren lo verificable.</li>
+<li><b>Autoría visible.</b> Contenido firmado por una persona real pesa más.</li>
+<li><b>Estructura semántica limpia.</b> Un solo H1, jerarquía real, tablas como tablas.</li>
+<li><b>Contenido en el HTML,</b> no inyectado con JavaScript al hacer clic. Los modelos no hacen clic.</li>
+<li><b>Consistencia externa.</b> Mismo nombre, dirección y descripción en todos los directorios.</li>
+</ul>
+<h3>Cómo se mide</h3>
+<p>No con Search Console. Se mide con una lista fija de preguntas que un comprador real haría, consultada cada mes en ChatGPT, Perplexity, Gemini y Copilot, registrando si la marca aparece y qué fuente cita el modelo. En paralelo, en analítica se separa el tráfico que llega con referrer de esos dominios.</p>
+<h3>Lo que no vamos a prometer</h3>
+<p>Nadie controla lo que responde un modelo. No hay una consola donde subir la posición, no hay acuerdos comerciales con OpenAI, y cualquiera que ofrezca «garantizar» una mención está vendiendo algo que no existe. Lo que sí se puede comprometer es el trabajo y la medición: qué se publica, qué se corrige y cómo se reporta cada mes.</p>`,
+  rel:["seo","home","redes","portafolio","blog"],
+  ctaT:'¿Quieres saber si la IA <em>te está mencionando?</em>',
+  ctaS:"Medimos tu visibilidad en ChatGPT, Perplexity y Gemini sin costo."
+};
+
+/* ===================== BLOG ===================== */
+P.blog = {
+  nav:"Blog", kicker:"Blog · Conqr",
+  h1:'Lo que nos preguntan <em>todos los días.</em>',
+  lede:"Las respuestas largas a las preguntas que recibimos en el diagnóstico. Sin registro y sin pedirte el correo.",
+  heroPh:["Portada editorial","Imagen de apertura del artículo destacado."],
+  note:"El blog no va en el menú ni en el hero: se entra por el pie y por los enlaces desde cada vertical. Eso no le quita tráfico, porque la gente llega a un artículo desde Google, no navegando. Existe porque las páginas de servicio tienen poca búsqueda y mucha intención, y los artículos al revés: el artículo trae a la gente y el enlace interno la lleva a la página que vende.",
+  dato:{big:"[12]", t2:"artículos cubren 11.000 búsquedas mensuales que las páginas de servicio no alcanzan.", src:"Suma de volúmenes · Semrush México"},
+  postsTitle:'Los <em>primeros doce.</em>',
+  postsSub:"En orden de publicación, priorizados por volumen y dificultad.",
+  posts:[
+    ["BTL","Qué es el material POP y cómo elegirlo","2.400/mes · KD 14","btl"],
+    ["Social media","Plan de redes sociales: cómo armarlo paso a paso","1.900/mes · KD 23","redes"],
+    ["SEO","Qué es el SEO y cómo funciona","1.600/mes · KD 59","seo"],
+    ["Marketing digital","Estrategia de marketing digital: la guía","1.000/mes","home","portafolio"],
+    ["BTL","Marketing de guerrilla: ejemplos que sí funcionaron","880/mes · KD 37","btl"],
+    ["Google Ads","Qué es Google Ads y cuánto cuesta","880/mes · KD 56","google"],
+    ["Social media","Gestión de redes sociales para empresas","590/mes · KD 24","redes"],
+    ["Eventos","Tipos de eventos corporativos","590/mes · KD 23","eventos"],
+    ["BTL","Qué es el trade marketing","480/mes · KD 28","btl"],
+    ["BTL","Qué es BTL y en qué se diferencia del ATL","390/mes · KD 27","btl"],
+    ["Social media","Marketing de influencers en México","390/mes · KD 32","redes"],
+    ["Meta Ads","Qué es Facebook Ads y cuánto cuesta","260/mes · KD 31","meta"]
+  ],
+  faq:[
+    ["¿Con qué frecuencia publican?","[N] artículos al mes. Preferimos pocos y completos a muchos y superficiales: un artículo que responde de verdad sigue trayendo lectores dos años después."],
+    ["¿Quién escribe los artículos?","Personas del equipo, firmadas con nombre y perfil. Usamos IA para investigar y ordenar, no para redactar sin revisión. Un texto sin autor pesa menos para Google y para los modelos de IA."],
+    ["¿Puedo usar esta información sin contratarlos?","Sí. Está escrita para que puedas ejecutarla tú. Si después decides que prefieres no hacerlo tú, ya sabes cómo trabajamos."]
+  ],
+  proseTitle:"Cómo usamos este blog",
+  prose:`<p>Cada artículo responde una pregunta concreta en las primeras tres oraciones y después la desarrolla. Esa estructura no es estilo: es lo que Google usa para el fragmento destacado y lo que los modelos de lenguaje extraen cuando alguien les hace esa misma pregunta.</p>
+<h3>Reglas que seguimos</h3>
+<ul>
+<li>La respuesta va arriba. La introducción, si existe, va después.</li>
+<li>Cada artículo enlaza a su página de servicio dos veces como máximo, con texto ancla natural.</li>
+<li>Los datos llevan fuente y fecha. Un número sin fuente se cae del texto.</li>
+<li>Todo artículo lleva autor con nombre, foto y perfil, y fecha de actualización visible.</li>
+<li>Si una recomendación cambia, se actualiza el artículo y se dice que se actualizó.</li>
+</ul>
+<h3>Qué no vas a encontrar</h3>
+<p>Listas de «10 tips» sin sustancia, contenido generado sin revisar, ni artículos escritos para una palabra clave que no responden nada. Es contenido más caro de producir y es la razón por la que funciona.</p>`,
+  rel:["home","seo","btl"],
+  ctaT:'¿Prefieres que lo <em>hagamos nosotros?</em>',
+  ctaS:"Agenda un diagnóstico de 30 minutos y te decimos por dónde empezar."
+};
+
+/* ===================== PORTAFOLIO ===================== */
+P.portafolio = {
+  nav:"Portafolio", kicker:"Portafolio · 2020 — 2026",
+  h1:'El trabajo, <em>con sus números.</em>',
+  lede:"Veintisiete proyectos de seis disciplinas. Cada uno con el contexto, el objetivo y lo que se logró.",
+  heroPh:["Reel de portafolio","Video corto en loop con los mejores momentos de campaña, evento y producto."],
+  note:"Página de portafolio: su trabajo es convertir, no posicionar. No tiene keyword objetivo propia con volumen, pero es la que más enlaces internos recibe desde las verticales y la que los modelos de IA usan para verificar que la agencia existe y con quién ha trabajado. Cada caso debería terminar siendo su propia URL.",
+  works:[
+    ["Digital","Pétalo","La marca #1 de higiénicos y servilletas en México, con más de 40 años. La llevamos a un territorio más moderno, inclusivo y digital.","Desde 2022 · Digital + Creativa + BTL"],
+    ["Digital","Izakaya Sushi","Una de las cadenas de sushi más grandes de México, con más de 40 sucursales. Social media, influencers y producción de contenido.","Desde 2023 · Digital + Paid Media + Multimedia"],
+    ["Digital","CBD Life","Líder de cannabis legal en Latinoamérica, presente en más de 40.000 puntos de venta y con más de 10 líneas de producto.","Desde 2020 · Digital + Creativa + Influencers"],
+    ["Medios","Bandai Namco","El mayor fabricante y distribuidor de juguetes y licencias del mundo. Campañas de performance y awareness en varias líneas de negocio.","ROI 6x · 10M de usuarios al mes · Inversión $4M MXN"],
+    ["Medios","Mastercard","Somos su agencia de medios en Caribe y LATAM, corriendo campañas para bancos globales.","ROI 3x a 6x · Conversión de TDC de $4–5 USD · $5M MXN"],
+    ["Medios","Bonafont","Campaña de adquisición B2B en real estate para el programa «Bonafont en tu Casa».","4.300 leads calificados · 110 desarrollos cerrados · ~$15M de ROI"],
+    ["Medios","Ruffles Ultra","Lanzamiento nacional enfocado en público centennial y millennial.","28.000 participantes · 3.5M de vistas en YouTube · 3.6M alcanzados"],
+    ["Medios","CENSO INEGI","Estrategia y compra de medios del Censo 2020, para llegar al mayor número posible de adultos en México.","68M de usuarios alcanzados · CPM de $0.80 MXN · $16M MXN"],
+    ["BTL","Vogue México y Latinoamérica","«Espacio Vogue», festival de pop up stores replicado en CDMX, Monterrey y Miami, con más de 50 marcas por evento.","Four Seasons CDMX · 5.000+ invitados · 2 veces al año"],
+    ["BTL","WIRED Summit","Segunda edición del summit oficial de WIRED en México.","Expo Santa Fe · 1.500+ invitados · Sept 2024"],
+    ["BTL","Monday Elevate","El evento de Monday.com sobre reinvención de procesos de negocio.","Reforma 180 · 250+ invitados · Oct 2024"],
+    ["BTL","Porsche × Rimiyoho","Live painting performance dentro de la gala de Día de Muertos de Vogue.","General Prim · 800+ invitados · Nov 2024"],
+    ["BTL","Lionsgate+ Pride","Activación y fiesta privada con influencers, medios y partners de la plataforma.","Sofitel Reforma · 1.000+ invitados · Jun 2024"],
+    ["BTL","Rockstar · PepsiCo","Fiesta de clausura de la convención IFC PepsiCo 2024.","JW Marriott Cancún · 300+ invitados · May 2024"],
+    ["BTL","Bioderma","Producción de pop up store en el Festival de las Flores de Masaryk.","Presidente Masaryk, Polanco · 800+ invitados · Abr 2024"],
+    ["BTL","Condé Nast","Cóctel de networking por la visita de Roger Lynch, CEO global.","Museo Soumaya · 150 invitados · Abr 2024"],
+    ["BTL","Signifyd","Producción de stand, activación y mecánica promocional para captación de prospectos.","Expo Santa Fe · 5.000+ asistentes · Sept 2024"],
+    ["BTL","Lionsgate+","Lanzamiento oficial en México: cóctel con live act, catering y activación de marca.","Casa Juárez CDMX · 500 invitados · Sept 2024"],
+    ["BTL","CBD Life · Lanzamiento","Primeros productos con cannabis legales en México. Prensa por la mañana, inversionistas por la noche.","CDMX · 600 invitados · Ago 2020"],
+    ["Branding","Manner","Productos de higiene familiar para Coppel. Diseño minimalista con un sistema de color por tipo de usuario.","Branding + packaging"],
+    ["Branding","Blalingo","Plataforma digital de idiomas posicionada como una opción flexible para cualquier idioma, ritmo y presupuesto.","Branding"],
+    ["Branding","Paraíso","Comercializadora de frutos secos fundada en 1936. Rebranding que conserva la esencia del logotipo original.","Rebranding + packaging"],
+    ["Branding","Beramana","Nutricosméticos con gama cromática vibrante. Manifiesto: «empowered fashionist woman».","Branding + packaging"],
+    ["Branding","Amora","Repostería nacida en CDMX con sabores en tendencia. Manifiesto: un momento inolvidable para compartir.","Branding"],
+    ["Web","New Era México","Líder global de gorras, con más de 100.000 SKUs en México. Rediseño completo y migración a Shopify Plus.","Aplicativos a la medida · Conexión con SAP Business One"],
+    ["Web","Bullmedia","Plataforma de publicidad geolocalizada que lanza campañas microsegmentadas en tiempo real.","Desarrollo de plataforma"],
+    ["Web","Violeta Films","Productora cinematográfica dedicada a contenidos audiovisuales creativos.","Sitio web"]
+  ],
+  faq:[
+    ["¿Puedo ver el caso completo de alguno de estos proyectos?","Sí. Cada proyecto tiene un documento con el contexto, la estrategia, las piezas y los resultados. Lo compartimos en la llamada de diagnóstico, según lo que acordamos con cada cliente sobre qué se puede publicar."],
+    ["¿Trabajan con marcas de mi tamaño?","Hay de todo en esta lista: marcas globales como Mastercard y New Era, y marcas que arrancaron con nosotros como Blalingo o Amora. El proceso es el mismo; lo que cambia es el alcance."],
+    ["¿Atienden fuera de México?","Sí. Hay clientes en Estados Unidos, Centroamérica, Caribe, Perú, Colombia y Brasil. La operación digital es remota; para ejecución en piso se confirma cobertura en cada caso."]
+  ],
+  proseTitle:"Cómo leer este portafolio",
+  prose:`<p>Un portafolio de agencia suele mostrar las piezas más bonitas sin decir qué pasó después. Aquí cada proyecto lleva el objetivo con el que se contrató y el resultado medible cuando el cliente permitió publicarlo. Es la misma información que verías en la junta de cierre.</p>
+<h3>Qué significa cada dato</h3>
+<ul>
+<li><b>En campañas de medios</b> publicamos inversión gestionada y retorno, porque es la única forma de comparar una agencia contra otra.</li>
+<li><b>En eventos y BTL</b> publicamos sede, número de asistentes y fecha. El tamaño y el recinto dicen más de la capacidad operativa que cualquier adjetivo.</li>
+<li><b>En branding y web</b> publicamos el alcance del proyecto, porque el resultado se mide en años, no en trimestres.</li>
+<li><b>En cuentas digitales</b> publicamos desde cuándo trabajamos con la marca. Una relación de cuatro años dice más que una campaña premiada.</li>
+</ul>
+<h3>Lo que no está aquí</h3>
+<p>Proyectos bajo acuerdo de confidencialidad y trabajo que no alcanzó sus objetivos. Lo segundo existe en toda agencia; lo honesto es decir que existe en lugar de fingir una racha perfecta. En la llamada se puede hablar de los dos.</p>
+<h3>Las disciplinas, juntas</h3>
+<p>Varios de estos proyectos cruzan categorías: Pétalo es digital, creativo y BTL al mismo tiempo; CBD Life empezó con un lanzamiento de evento y hoy es una cuenta digital de seis años. Esa continuidad entre lo que se publica y lo que se ejecuta en piso es la razón por la que las marcas se quedan.</p>`,
+  rel:["home","btl","seo"],
+  ctaT:'¿Tu marca <em>sigue en esta lista?</em>',
+  ctaS:"Agenda una llamada de 30 minutos y vemos qué necesita tu próximo proyecto."
+};
+
+/* ===================== MENU ===================== */
+var MENU = [
+  {label:"Creative", items:[
+    ["Creatividad","Conceptos, campañas y key visuals","home","creatividad"],
+    ["Branding","Naming, identidad y packaging","home","branding"],
+    ["Web y e-commerce","UI, UX y desarrollo","home","web"]
+  ]},
+  {label:"Social media", go:"redes"},
+  {label:"BTL y eventos", items:[
+    ["Agencia BTL","Activaciones y punto de venta","btl"],
+    ["Eventos corporativos","Convenciones y lanzamientos","eventos"],
+    ["Stands para expos","Diseño, fabricación y montaje","stands"]
+  ]},
+  {label:"Paid media", items:[
+    ["Google Ads","Búsqueda, Shopping y YouTube","google"],
+    ["Meta Ads","Facebook e Instagram","meta"]
+  ]},
+  {label:"SEO y GEO", items:[
+    ["Agencia SEO","Posicionamiento orgánico","seo"],
+    ["Agencia GEO","Visibilidad en ChatGPT y buscadores con IA","geo"]
+  ]},
+  {label:"Portafolio", go:"portafolio"}
+];
+
+/* ===================== RENDER ===================== */
+var cur = "home";
+function ph(t,d,cls){ return '<div class="ph '+(cls||"")+'"><span class="t">'+t+'</span><span class="d">'+d+'</span></div>'; }
+
+function buildPage(k){
+  var p = P[k];
+  var h = "";
+
+  h += '<section class="hero"><div class="wrap hero-in"><div>'
+     + '<div class="note"><div class="note-in">'+p.note+'</div></div>'
+     + '<p class="kicker mono">'+p.kicker+'</p><p class="lede">'+p.lede+'</p><h1>'+p.h1+'</h1>'
+     + '<div class="acts"><button class="btn" data-go="contacto">Agendar llamada</button>'
+     + (k==="portafolio" ? '' : '<button class="btn btn-b" data-go="portafolio">Ver portafolio</button>')
+     + '</div>'
+     + '</div><div>'+ph(p.heroPh[0],p.heroPh[1],"ph-hero")+'</div></div></section>';
+
+  if(p.etim){
+    h += '<section><div class="wrap sec"><div class="etim">'
+       + '<div><div class="w">con·<i>quer</i></div><div class="ph2">/ˈkäNGkər/ · verbo</div></div>'
+       + '<div class="def">Superar un reto <b>con éxito.</b> Es lo que significa el nombre y es la única promesa que hacemos.</div>'
+       + '</div></div></section>';
+  }
+
+  if(p.works){
+    var cats = ["Todo"].concat(p.works.map(function(w){return w[0];}).filter(function(v,i,a){return a.indexOf(v)===i;}));
+    h += '<section><div class="wrap sec"><div class="filters">'
+       + cats.map(function(c,i){return '<button data-cat="'+c+'"'+(i===0?' class="on"':'')+'>'+c+'</button>';}).join("")
+       + '</div><div class="works" id="works">'
+       + p.works.map(function(w){
+           return '<article class="work" data-cat="'+w[0]+'">'+ph("Imagen",w[1]+" — foto, render o captura del proyecto")
+             +'<div class="in"><span class="cat">'+w[0]+'</span><h3>'+w[1]+'</h3><p>'+w[2]+'</p>'
+             +'<p class="res">'+w[3]+'</p></div></article>';
+         }).join("")+'</div></div></section>';
+  }
+
+  if(p.blocks){
+    if(p.blocksNote) h += '<section><div class="wrap" style="padding-block:30px 0"><div class="note"><div class="note-in">'+p.blocksNote+'</div></div></div></section>';
+    p.blocks.forEach(function(b,i){
+      var id = b.anchor ? ' id="b-'+b.anchor+'"' : '';
+      h += '<div class="split'+(i%2?' rev':'')+'"'+id+'>'
+         + '<div class="side"><h2>'+b.t+'</h2><p class="txt">'+b.p+'</p>'
+         + '<ul class="items">'+b.items.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>'
+         + (b.go ? '<button class="go" data-go="'+b.go+'">Ver '+P[b.go].nav+' →</button>' : '')
+         + '</div><div class="media">'+ph(b.img[0],b.img[1])+'</div></div>';
+    });
+  }
+
+  if(p.dato){
+    h += '<section><div class="wrap sec"><div class="dato"><div class="big">'+p.dato.big+'</div>'
+       + '<div><div class="t2">'+p.dato.t2+'</div><div class="src">'+p.dato.src+'</div></div></div></div></section>';
+  }
+
+  if(p.stats){
+    h += '<section><div class="wrap sec"><div class="stats">'
+       + p.stats.map(function(s){return '<div class="stat"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';}).join("")
+       + '</div></div></section>';
+  }
+
+  if(p.plats){
+    h += '<section><div class="wrap sec" style="text-align:center"><div class="sec-head" style="margin-inline:auto"><h2>'+p.platsTitle+'</h2></div><div class="plats">'
+       + p.plats.map(function(x){return '<span>'+x+'</span>';}).join("")+'</div></div></section>';
+  }
+
+  if(p.posts){
+    h += '<section><div class="wrap sec"><div class="sec-head"><h2>'+p.postsTitle+'</h2><p class="sub">'+p.postsSub+'</p></div><div class="posts">'
+       + p.posts.map(function(a){
+           return '<article class="post">'+ph("Portada",a[1])
+             +'<div class="in"><p class="kv">'+a[0]+'</p><h3>'+a[1]+'</h3>'
+             +'<p class="mt">'+a[2]+' → <span style="color:var(--accent);cursor:pointer" data-go="'+a[3]+'">'+P[a[3]].nav+'</span></p></div></article>';
+         }).join("")+'</div></div></section>';
+  }
+
+  if(p.proc){
+    h += '<section><div class="wrap sec"><div class="sec-head"><h2>'+p.procTitle+'</h2></div><div class="steps">'
+       + p.proc.map(function(s,i){return '<div class="step"><span class="n">0'+(i+1)+'</span><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div>';}).join("")
+       + '</div></div></section>';
+  }
+
+  if(p.faq){
+    h += '<section><div class="wrap sec"><div class="sec-head"><h2>Preguntas <em>frecuentes.</em></h2></div>'
+       + '<div class="note"><div class="note-in"><b>Aquí va el grueso del texto.</b> Acordeón nativo &lt;details&gt;: el contenido viaja en el HTML aunque esté cerrado, así que cuenta para posicionamiento y es lo que más citan los modelos de IA. Marcar con schema FAQPage.</div></div>'
+       + p.faq.map(function(f,i){return '<details'+(i===0?' open':'')+'><summary>'+f[0]+'</summary><div class="ans"><p>'+f[1]+'</p></div></details>';}).join("")
+       + '</div></section>';
+  }
+
+  if(p.prose){
+    h += '<section><div class="wrap sec"><div class="sec-head"><h2>'+p.proseTitle+'</h2></div>'
+       + '<div class="note"><div class="note-in"><b>Bloque con «ver más».</b> Todo el texto está en el HTML desde la carga; el botón solo cambia max-height. Google lo indexa igual y ChatGPT lo lee sin abrirlo. Si se trajera con JavaScript al hacer clic, no existiría para ninguno de los dos.</div></div>'
+       + '<div class="prose expand" id="exp">'+p.prose+'</div>'
+       + '<button class="more" id="moreBtn" aria-expanded="false">Ver más ↓</button></div></section>';
+  }
+
+  if(p.rel){
+    h += '<section><div class="wrap sec"><div class="sec-head"><h2>También <em>te sirve.</em></h2></div><div class="rel">'
+       + p.rel.map(function(r){return '<button data-go="'+r+'">'+P[r].nav+' →</button>';}).join("")+'</div></div></section>';
+  }
+
+  h += '<section id="contacto"><div class="wrap cta"><h2>'+p.ctaT+'</h2><p>'+p.ctaS+'</p>'
+     + '<button class="btn">Agendar llamada</button></div></section>';
+
+  return h;
+}
+
+var ALL = ["home","redes","btl","eventos","stands","seo","google","meta","geo","portafolio","blog"];
+
+function renderAll(){
+  cur = "all";
+  document.getElementById("app").innerHTML = ALL.map(function(k){
+    return '<div class="pagewrap"><div class="plabel">'+P[k].nav+'</div>'+buildPage(k)+'</div>';
+  }).join("");
+  document.querySelectorAll(".expand").forEach(function(e){ e.classList.add("open"); });
+  document.querySelectorAll("details").forEach(function(d){ d.open = true; });
+  document.querySelectorAll(".more").forEach(function(b){ b.hidden = true; });
+  wireAll();
+  window.scrollTo(0,0);
+}
+
+function render(k, anchor){
+  if(!P[k]) return;
+  cur = k;
+  var h = buildPage(k);
+  document.getElementById("app").innerHTML = h;
+  wireAll();
+  document.querySelectorAll("#menu .mi").forEach(function(m){
+    m.classList.toggle("on", m.dataset.page===k || (m.dataset.pages||"").split(",").indexOf(k)>-1);
+  });
+  document.getElementById("menu").classList.remove("open");
+  if(anchor){
+    var el = document.getElementById("b-"+anchor);
+    if(el){ el.scrollIntoView({behavior:"smooth",block:"start"}); return; }
+  }
+  window.scrollTo(0,0);
+}
+
+function go(t, anchor){
+  if(t==="contacto"){ var c=document.getElementById("contacto"); if(c) c.scrollIntoView({behavior:"smooth"}); return; }
+  if(!P[t]) return;
+  if(t===cur && anchor){
+    var el=document.getElementById("b-"+anchor);
+    if(el){ el.scrollIntoView({behavior:"smooth"}); document.getElementById("menu").classList.remove("open"); return; }
+  }
+  render(t, anchor);
+}
+
+function wireAll(){
+  document.querySelectorAll("[data-go]").forEach(function(el){
+    if(el.dataset.wired) return; el.dataset.wired="1";
+    el.addEventListener("click", function(){ go(el.dataset.go, el.dataset.anchor); });
+  });
+  var mb = document.getElementById("moreBtn");
+  if(mb && !mb.dataset.wired){
+    mb.dataset.wired="1";
+    mb.addEventListener("click", function(){
+      var box = document.getElementById("exp");
+      var open = box.classList.toggle("open");
+      mb.setAttribute("aria-expanded", open?"true":"false");
+      mb.textContent = open ? "Ver menos ↑" : "Ver más ↓";
+      count();
+    });
+  }
+  document.querySelectorAll("details").forEach(function(d){
+    if(d.dataset.wired) return; d.dataset.wired="1";
+    d.addEventListener("toggle", count);
+  });
+  document.querySelectorAll(".filters button").forEach(function(b){
+    if(b.dataset.wired) return; b.dataset.wired="1";
+    b.addEventListener("click", function(){
+      var c = b.dataset.cat;
+      document.querySelectorAll(".filters button").forEach(function(o){ o.classList.toggle("on", o===b); });
+      document.querySelectorAll("#works .work").forEach(function(w){
+        w.hidden = !(c==="Todo" || w.dataset.cat===c);
+      });
+      count();
+    });
+  });
+  count();
+}
+
+/* menu + footer */
+(function(){
+  var menu = document.getElementById("menu");
+  MENU.forEach(function(m){
+    var mi = document.createElement("div"); mi.className="mi";
+    var b = document.createElement("button");
+    if(m.go){ b.textContent = m.label; b.dataset.go = m.go; mi.dataset.page = m.go; }
+    else { b.innerHTML = m.label + '<span class="car">▼</span>'; mi.dataset.pages = m.items.map(function(i){return i[2];}).join(","); }
+    mi.appendChild(b);
+    if(m.items){
+      var dd = document.createElement("div"); dd.className="dd";
+      m.items.forEach(function(it){
+        var ib = document.createElement("button");
+        ib.innerHTML = it[0] + '<span>' + it[1] + '</span>';
+        ib.dataset.go = it[2];
+        if(it[3]) ib.dataset.anchor = it[3];
+        dd.appendChild(ib);
+      });
+      mi.appendChild(dd);
+    }
+    menu.appendChild(mi);
+  });
+
+  var foot = document.getElementById("foot");
+  var groups = [["Creative",[["Creatividad","home","creatividad"],["Branding","home","branding"],["Web y e-commerce","home","web"]]],
+                ["Contenido",[["Social media","redes"],["Portafolio","portafolio"],["Blog","blog"]]],
+                ["Paid media",[["Google Ads","google"],["Meta Ads","meta"]]],
+                ["Ejecución en piso",[["Agencia BTL","btl"],["Eventos corporativos","eventos"],["Stands para expos","stands"]]],
+                ["Posicionamiento",[["Agencia SEO","seo"],["Agencia GEO","geo"]]]];
+  groups.forEach(function(g){
+    var d = document.createElement("div");
+    d.innerHTML = "<h4>"+g[0]+"</h4>";
+    g[1].forEach(function(it){
+      var b = document.createElement("button"); b.textContent = it[0]; b.dataset.go = it[1];
+      if(it[2]) b.dataset.anchor = it[2];
+      d.appendChild(b);
+    });
+    foot.appendChild(d);
+  });
+
+  document.getElementById("btn-all").addEventListener("click", function(){ renderAll(); });
+  document.getElementById("burger").addEventListener("click", function(){
+    document.getElementById("menu").classList.toggle("open");
+  });
+  var bn = document.getElementById("btn-notes");
+  bn.addEventListener("click", function(){
+    var on = document.body.classList.toggle("notes");
+    bn.setAttribute("aria-pressed", on?"true":"false");
+    bn.textContent = on ? "Ocultar notas" : "Notas SEO";
+    count();
+  });
+})();
+
+/* contador */
+function words(s){ var m=(s||"").trim().match(/[^\s]+/g); return m?m.length:0; }
+function walk(node, visible){
+  var total=0, vis=0;
+  Array.prototype.forEach.call(node.childNodes, function(n){
+    if(n.nodeType===3){ var w=words(n.nodeValue); total+=w; if(visible) vis+=w; return; }
+    if(n.nodeType!==1) return;
+    var v = visible;
+    if(n.classList && n.classList.contains("note") && !document.body.classList.contains("notes")) v=false;
+    if(n.classList && n.classList.contains("expand") && !n.classList.contains("open")) v=false;
+    if(n.tagName==="DETAILS" && !n.open){
+      var r1 = walk(n,false); total += r1.total;
+      var sum = n.querySelector("summary");
+      if(visible && sum) vis += words(sum.textContent);
+      return;
+    }
+    var r = walk(n,v); total+=r.total; vis+=r.vis;
+  });
+  return {total:total, vis:vis};
+}
+function count(){
+  var r = walk(document.getElementById("app"), true);
+  document.getElementById("cv").textContent = r.vis;
+  document.getElementById("ct").textContent = r.total;
+}
+
+wireAll();
+render("home");
+})();
+</script>
+</body>
+</html>
